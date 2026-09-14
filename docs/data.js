@@ -154,7 +154,7 @@ const TILES = [
   { route: 'moterom', slot: 'tile-moterom', src: 'assets/cc/glasshallen-publikum.jpg', kicker: 'Møterom & arrangement', title: 'Møterom og arrangement', lead: 'Styrerom, takterrasse, Glasshallen, auditorium og studio.', tags: ['Styrerom', 'Glasshallen', 'Takterrassen'] },
   { route: 'motemat', slot: 'tile-motemat', src: 'assets/mat/Kyllingsalat.jpg', kicker: 'Møtemat', title: 'Møtemat-menyer', lead: 'Wellmade-pakker og à la carte til møtet, lagt rett i forespørselen.', tags: ['Dagpakker', 'Lunsj', 'Pausemat'] },
   { route: 'praktisk', slot: 'tile-trening', src: 'assets/cc/trening-lopemoller.webp', kicker: 'Trening & fasiliteter', title: 'Trening og energi', lead: 'Treningssenter, garderober og sykkelparkering, driftet av Corporis.', tags: ['Trening', 'Garderober', 'Sykkel'] },
-  { href: 'Hoyden.dc.html', slot: 'tile-hoyden', src: 'assets/cc/hoyden-sal.jpg', kicker: 'Høyden', title: 'Høyden Restaurant', lead: 'Middager, selskap og markeringer i 10. etasje, med tak­terrassen ved siden av.', tags: ['Middag', 'Selskap', 'Utsikt'] }
+  { route: 'servering', tab: 'hoyden', slot: 'tile-hoyden', src: 'assets/cc/hoyden-sal.jpg', kicker: 'Høyden', title: 'Høyden Restaurant', lead: 'Middager, selskap og markeringer i 10. etasje, med tak­terrassen ved siden av.', tags: ['Middag', 'Selskap', 'Utsikt'] }
 ];
 
 const HOYDEN_CARDS = [
