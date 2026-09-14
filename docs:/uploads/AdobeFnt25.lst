@@ -1,0 +1,151 @@
+%!Adobe-FontList 1.25
+%Locale:0x409
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:Invalid
+OutlineFileName:/Users/eilin/Library/CloudStorage/GoogleDrive-eilinbergum@gmail.com/My Drive/Bergum Kreativ/Compass Group/Construction City/Destinasjon CC/Ferdig_materiell/CC_Destinasjon_720x960px_September Folder/Document fonts/AdobeFnt25.lst
+FileLength:3947
+FileModTime:810904770
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:Type1
+FontName:Gilroy-ExtraBold
+FamilyName:Gilroy
+StyleName:ExtraBold
+MenuName:Gilroy ExtraBold
+StyleBits:0
+WeightClass:800
+WidthClass:5
+AngleClass:0
+FullName:Gilroy ExtraBold
+WritingScript:Roman
+OutlineFileName:/Users/eilin/Library/CloudStorage/GoogleDrive-eilinbergum@gmail.com/My Drive/Bergum Kreativ/Compass Group/Construction City/Destinasjon CC/Ferdig_materiell/CC_Destinasjon_720x960px_September Folder/Document fonts/Gilroy-ExtraBold.otf
+DataFormat:sfntData
+UsesStandardEncoding:yes
+isCFF:yes
+hasSVG:no
+hasSBIX:no
+hasCOLR:no
+VariableFontType:NonVariableFont
+FileLength:54956
+FileModTime:490173556
+NameArray:0,Mac,4,Gilroy ExtraBold
+NameArray:0,Win,1,Gilroy ExtraBold
+NameArray:0,Win,16,Gilroy
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:Type1
+FontName:Gilroy-Light
+FamilyName:Gilroy
+StyleName:Light
+MenuName:Gilroy Light
+StyleBits:0
+WeightClass:300
+WidthClass:5
+AngleClass:0
+FullName:Gilroy Light
+WritingScript:Roman
+OutlineFileName:/Users/eilin/Library/CloudStorage/GoogleDrive-eilinbergum@gmail.com/My Drive/Bergum Kreativ/Compass Group/Construction City/Destinasjon CC/Ferdig_materiell/CC_Destinasjon_720x960px_September Folder/Document fonts/Gilroy-Light.otf
+DataFormat:sfntData
+UsesStandardEncoding:yes
+isCFF:yes
+hasSVG:no
+hasSBIX:no
+hasCOLR:no
+VariableFontType:NonVariableFont
+FileLength:54704
+FileModTime:490173551
+NameArray:0,Mac,4,Gilroy Light
+NameArray:0,Win,1,Gilroy Light
+NameArray:0,Win,16,Gilroy
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:Type1
+FontName:MinionPro-Regular
+FamilyName:Minion Pro
+StyleName:Regular
+MenuName:Minion Pro
+StyleBits:0
+WeightClass:400
+WidthClass:5
+AngleClass:0
+FullName:Minion Pro
+WritingScript:Roman
+OutlineFileName:/Users/eilin/Library/CloudStorage/GoogleDrive-eilinbergum@gmail.com/My Drive/Bergum Kreativ/Compass Group/Construction City/Destinasjon CC/Ferdig_materiell/CC_Destinasjon_720x960px_September Folder/Document fonts/MinionPro-Regular.otf
+DataFormat:sfntData
+UsesStandardEncoding:yes
+isCFF:yes
+hasSVG:no
+hasSBIX:no
+hasCOLR:no
+VariableFontType:NonVariableFont
+FileLength:218640
+FileModTime:808905342
+DesignSize:110
+NameArray:0,Mac,4,Minion Pro
+NameArray:0,Win,1,Minion Pro
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:Type1
+FontName:PPNeueMachina-PlainRegular
+FamilyName:PP Neue Machina
+StyleName:Plain Regular
+MenuName:PP Neue Machina Plain
+StyleBits:0
+WeightClass:400
+WidthClass:5
+AngleClass:0
+FullName:PP Neue Machina Plain Regular
+WritingScript:Roman
+OutlineFileName:/Users/eilin/Library/CloudStorage/GoogleDrive-eilinbergum@gmail.com/My Drive/Bergum Kreativ/Compass Group/Construction City/Destinasjon CC/Ferdig_materiell/CC_Destinasjon_720x960px_September Folder/Document fonts/PPNeueMachina-PlainRegular.otf
+DataFormat:sfntData
+UsesStandardEncoding:yes
+isCFF:yes
+hasSVG:no
+hasSBIX:no
+hasCOLR:no
+VariableFontType:NonVariableFont
+FileLength:119852
+FileModTime:674395848
+NameArray:0,Mac,4,PP Neue Machina Plain Regular
+NameArray:0,Win,1,PP Neue Machina Plain
+NameArray:0,Win,16,PP Neue Machina
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:Type1
+FontName:PPNeueMachina-PlainUltrabold
+FamilyName:PP Neue Machina
+StyleName:Plain Ultrabold
+MenuName:PP Neue Machina Plain Ultrabold
+StyleBits:0
+WeightClass:800
+WidthClass:5
+AngleClass:0
+FullName:PP Neue Machina Plain Ultrabold
+WritingScript:Roman
+OutlineFileName:/Users/eilin/Library/CloudStorage/GoogleDrive-eilinbergum@gmail.com/My Drive/Bergum Kreativ/Compass Group/Construction City/Destinasjon CC/Ferdig_materiell/CC_Destinasjon_720x960px_September Folder/Document fonts/PPNeueMachina-PlainUltrabold.otf
+DataFormat:sfntData
+UsesStandardEncoding:yes
+isCFF:yes
+hasSVG:no
+hasSBIX:no
+hasCOLR:no
+VariableFontType:NonVariableFont
+FileLength:122500
+FileModTime:674395850
+NameArray:0,Mac,4,PP Neue Machina Plain Ultrabold
+NameArray:0,Win,1,PP Neue Machina Plain Ultrabold
+NameArray:0,Win,16,PP Neue Machina
+%EndFont
+

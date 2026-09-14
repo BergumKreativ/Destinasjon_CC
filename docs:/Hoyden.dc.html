@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta charset="utf-8" />
+<title>Høyden Restaurant – menyer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+<link href="https://fonts.googleapis.com/css2?family=Gloock&display=swap" rel="stylesheet" />
+<style>
+  @font-face { font-family:'Gilroy'; src:url('assets/fonts/Gilroy-Light.otf') format('opentype'); font-weight:300; font-style:normal; font-display:swap; }
+  @font-face { font-family:'Gilroy'; src:url('assets/fonts/Gilroy-Light.otf') format('opentype'); font-weight:400; font-style:normal; font-display:swap; }
+  @font-face { font-family:'Gilroy'; src:url('assets/fonts/Gilroy-ExtraBold.otf') format('opentype'); font-weight:700; font-style:normal; font-display:swap; }
+  html, body { margin:0; padding:0; background:#F6F0E9; }
+  body { font-family:'Gilroy',system-ui,sans-serif; font-weight:300; color:#121212; -webkit-font-smoothing:antialiased; text-wrap:pretty; }
+  a { color:#121212; }
+  a:hover { color:#F5B41A; }
+</style>
+</helmet>
+
+<div style="min-height:100vh;display:flex;flex-direction:column;background:#F6F0E9">
+
+<header style="position:relative;background:#121212;color:#F6F0E9;overflow:hidden">
+  <img src="assets/cc/hoyden-sal.jpg" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" />
+  <div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(18,18,18,0.72) 0%,rgba(18,18,18,0.42) 38%,rgba(18,18,18,0.68) 100%);pointer-events:none"></div>
+  <div style="position:absolute;left:0;right:0;top:0;z-index:2;max-width:1400px;margin:0 auto;padding:26px 32px 20px;display:flex;align-items:flex-start;gap:24px">
+    <div style="flex:0 0 auto;font-family:'Gilroy',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;line-height:1.5;padding-top:6px">Construction City<br />10. etasje</div>
+    <div style="flex:1 1 auto"></div>
+    <a href="mailto:hoyden@compass-group.no" style="flex:0 0 auto;width:86px;height:86px;border-radius:50%;background:#F5B41A;color:#121212;text-decoration:none;display:flex;align-items:center;justify-content:center;text-align:center;font-family:'Gilroy',sans-serif;font-size:9px;font-weight:700;letter-spacing:0.09em;text-transform:uppercase;line-height:1.6" style-hover="background:#F6F0E9">Kontakt &amp; booking</a>
+  </div>
+  <div style="position:relative;max-width:1400px;margin:0 auto;padding:120px 32px 110px;min-height:clamp(300px,36vw,480px);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center">
+    <img src="assets/cc/hoyden-logo-beige.svg" alt="Høyden" style="display:block;width:clamp(240px,52vw,620px);height:auto" />
+    <div style="font-family:'Gilroy',sans-serif;font-size:clamp(11px,1.4vw,15px);font-weight:400;letter-spacing:0.5em;text-transform:uppercase;margin-top:14px;padding-left:0.5em">Restaurant</div>
+  </div>
+</header>
+
+<div style="background:#F6F0E9">
+  <div style="max-width:1400px;margin:0 auto;padding:26px 32px 6px;display:flex;gap:8px;flex-wrap:wrap">
+    <sc-for list="{{ sider }}" as="s" hint-placeholder-count="2">
+      <sc-if value="{{ s.active }}" hint-placeholder-val="{{ false }}">
+        <button onClick="{{ s.go }}" style="cursor:pointer;font-family:'Gilroy',sans-serif;background:#121212;border:1px solid #121212;color:#F6F0E9;border-radius:999px;padding:12px 26px;font-size:10.5px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase">{{ s.label }}</button>
+      </sc-if>
+      <sc-if value="{{ s.idle }}" hint-placeholder-val="{{ true }}">
+        <button onClick="{{ s.go }}" style="cursor:pointer;font-family:'Gilroy',sans-serif;background:transparent;border:1px solid #121212;color:#121212;border-radius:999px;padding:12px 26px;font-size:10.5px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase" style-hover="background:#F5B41A;border-color:#F5B41A;color:#121212">{{ s.label }}</button>
+      </sc-if>
+    </sc-for>
+  </div>
+</div>
+
+<sc-if value="{{ visRestaurant }}" hint-placeholder-val="{{ false }}">
+  <section style="background:#F6F0E9">
+    <div style="max-width:1400px;margin:0 auto;padding:52px 32px 24px;display:flex;gap:64px;flex-wrap:wrap;align-items:flex-start">
+      <div style="flex:1 1 400px;min-width:0">
+        <h1 style="font-family:'Gilroy',sans-serif;font-weight:400;font-size:clamp(34px,4.4vw,58px);line-height:1.08;letter-spacing:0.06em;text-transform:uppercase;margin:0 0 18px">Høyden Restaurant</h1>
+        <p style="font-size:18px;font-weight:300;line-height:1.6;margin:0 0 20px;max-width:34ch">Et bedre måltid, et møte eller en markering – litt over hverdagen.</p>
+        <div style="width:68px;height:2px;background:#F5B41A;margin:0 0 24px"></div>
+        <p style="font-size:14.5px;font-weight:300;line-height:1.85;max-width:48ch;margin:0 0 16px">I 10. etasje, høyt over atriet og pulsen i huset, ligger Høyden Restaurant. Her kan leietakere, gjester og besøkende samles til måltider, møter og markeringer med panoramautsikt over Oslo.</p>
+        <p style="font-size:14.5px;font-weight:300;line-height:1.85;max-width:48ch;margin:0 0 16px">Høyden passer for middager, kundearrangementer, selskaper og anledninger som fortjener litt ekstra. Opplevelsen kan også kombineres med privat lounge, styrerom eller takterrasse etter behov.</p>
+        <p style="font-size:14.5px;font-weight:300;line-height:1.85;max-width:48ch;margin:0 0 28px">Med direkte tilgang til takterrassen kan arrangementet fortsette ute når været tillater det – med byen som bakteppe.</p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap">
+          <button onClick="{{ tilMeny }}" style="cursor:pointer;font-family:'Gilroy',sans-serif;background:#121212;border:1px solid #121212;color:#F6F0E9;border-radius:999px;padding:16px 30px;font-size:10.5px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase" style-hover="background:#F5B41A;border-color:#F5B41A;color:#121212">Se selskapsmenyene</button>
+          <a href="mailto:hoyden@compass-group.no" style="font-family:'Gilroy',sans-serif;background:transparent;border:1px solid #121212;color:#121212;border-radius:999px;padding:16px 30px;font-size:10.5px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;text-decoration:none" style-hover="background:#F5B41A;border-color:#F5B41A">Book bord</a>
+        </div>
+      </div>
+      <div style="flex:1 1 380px;min-width:0;display:grid;grid-template-columns:1fr 1fr;gap:14px">
+        <img src="assets/cc/hoyden-glass.jpg" alt="" style="grid-column:1 / -1;width:100%;aspect-ratio:16/10;object-fit:cover;display:block" />
+        <img src="assets/cc/hoyden-buffet.jpg" alt="" style="width:100%;aspect-ratio:1/1;object-fit:cover;display:block" />
+        <img src="assets/cc/takterrassen-panorama.jpg" alt="" style="width:100%;aspect-ratio:1/1;object-fit:cover;display:block" />
+      </div>
+    </div>
+  </section>
+
+  <section style="background:#F6F0E9">
+    <div style="max-width:1400px;margin:0 auto;padding:24px 32px 90px">
+      <div style="border-top:1px solid rgba(18,18,18,0.3);padding-top:34px;display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:40px">
+        <div>
+          <div style="font-family:'Gilroy',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:#6B6257;margin-bottom:12px">Passer for</div>
+          <div style="font-size:14.5px;font-weight:300;line-height:1.9">Middager<br />Kundearrangementer<br />Selskaper og markeringer<br />Møter med servering</div>
+        </div>
+        <div>
+          <div style="font-family:'Gilroy',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:#6B6257;margin-bottom:12px">I samme etasje</div>
+          <div style="font-size:14.5px;font-weight:300;line-height:1.9">Takterrassen<br />Privat lounge<br />Styrerom</div>
+        </div>
+        <div>
+          <div style="font-family:'Gilroy',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:#6B6257;margin-bottom:12px">Adresse</div>
+          <div style="font-size:14.5px;font-weight:300;line-height:1.9">Construction City<br />Standardveien 1<br />0614 Oslo</div>
+        </div>
+        <div>
+          <div style="font-family:'Gilroy',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:#6B6257;margin-bottom:12px">Booking</div>
+          <div style="font-size:14.5px;font-weight:300;line-height:1.9">Bord og selskap bookes på e-post.</div>
+          <a href="mailto:hoyden@compass-group.no" style="font-size:14.5px;display:block;margin-top:8px">hoyden@compass-group.no</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</sc-if>
+
+<sc-if value="{{ visMeny }}" hint-placeholder-val="{{ true }}">
+<div style="background:#F6F0E9">
+  <div style="max-width:1400px;margin:0 auto;padding:14px 32px 6px;display:flex;gap:8px;flex-wrap:wrap">
+    <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="4">
+      <sc-if value="{{ t.active }}" hint-placeholder-val="{{ false }}">
+        <button onClick="{{ t.go }}" style="cursor:pointer;font-family:'Gilroy',sans-serif;background:#121212;border:1px solid #121212;color:#F6F0E9;border-radius:999px;padding:11px 22px;font-size:10px;font-weight:700;letter-spacing:0.09em;text-transform:uppercase">{{ t.label }}</button>
+      </sc-if>
+      <sc-if value="{{ t.idle }}" hint-placeholder-val="{{ true }}">
+        <button onClick="{{ t.go }}" style="cursor:pointer;font-family:'Gilroy',sans-serif;background:transparent;border:1px solid #121212;color:#121212;border-radius:999px;padding:11px 22px;font-size:10px;font-weight:700;letter-spacing:0.09em;text-transform:uppercase" style-hover="background:#F5B41A;border-color:#F5B41A;color:#121212">{{ t.label }}</button>
+      </sc-if>
+    </sc-for>
+  </div>
+</div>
+
+<section style="background:#F6F0E9">
+  <div style="max-width:1400px;margin:0 auto;padding:52px 32px 40px;display:flex;gap:56px;flex-wrap:wrap;align-items:flex-start">
+    <div style="flex:1 1 380px;min-width:0">
+      <h1 style="font-family:'Gilroy',sans-serif;font-weight:400;font-size:clamp(34px,4.4vw,58px);line-height:1.08;letter-spacing:0.06em;text-transform:uppercase;margin:0 0 18px">Selskapsmeny</h1>
+      <p style="font-size:18px;font-weight:300;line-height:1.6;margin:0 0 20px;max-width:34ch">{{ menyLead }}</p>
+      <div style="width:68px;height:2px;background:#F5B41A;margin:0 0 22px"></div>
+      <p style="font-size:14.5px;line-height:1.8;max-width:46ch;margin:0 0 26px">Menyene serveres i 10. etasje med panoramautsikt over Oslo. Alle retter kan tilpasses allergier og preferanser – gi beskjed i forespørselen.</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center">
+        <button onClick="{{ velgMeny }}" style="cursor:pointer;font-family:'Gilroy',sans-serif;background:#121212;border:1px solid #121212;color:#F6F0E9;border-radius:999px;padding:16px 30px;font-size:10.5px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase" style-hover="background:#F5B41A;border-color:#F5B41A;color:#121212">Legg til meny</button>
+        <div style="font-family:'Gilroy',sans-serif;font-size:24px;font-weight:300;letter-spacing:0.02em">{{ menyPris }}</div>
+        <div style="font-family:'Gilroy',sans-serif;font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#6B6257">per person, eks. mva</div>
+      </div>
+    </div>
+    <div style="flex:1 1 320px;min-width:0;padding:6px 0 0">
+      <div style="font-family:'Gilroy',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:#6B6257;margin-bottom:16px">Slik bestiller du</div>
+      <ol style="margin:0;padding-left:18px;font-size:14.5px;font-weight:300;line-height:1.9">
+        <li>Velg menyen som passer selskapet.</li>
+        <li>Legg til antall gjester og dato.</li>
+        <li>Send forespørselen – den går rett til Høyden.</li>
+      </ol>
+      <div style="height:22px"></div>
+      <div style="font-family:'Gilroy',sans-serif;font-size:12px;font-weight:400;letter-spacing:0.14em;text-transform:uppercase;margin-bottom:6px">Høyden Restaurant</div>
+      <a href="mailto:hoyden@compass-group.no" style="font-size:14.5px;display:block">hoyden@compass-group.no</a>
+    </div>
+  </div>
+</section>
+
+<section style="background:#F6F0E9">
+  <div style="max-width:1400px;margin:0 auto;padding:16px 32px 100px">
+    <div style="display:flex;align-items:baseline;justify-content:space-between;gap:24px;flex-wrap:wrap;border-bottom:1px solid rgba(18,18,18,0.2);padding-bottom:16px;margin:0 0 34px">
+      <h2 style="font-family:'Gilroy',sans-serif;font-weight:400;font-size:clamp(22px,2.4vw,30px);letter-spacing:0.14em;text-transform:uppercase;margin:0">{{ menyTittel }}</h2>
+      <div style="font-family:'Gilroy',sans-serif;font-size:11px;font-weight:400;letter-spacing:0.18em;text-transform:uppercase;color:#6B6257">{{ rettAntall }}</div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:0 80px">
+      <sc-for list="{{ retter }}" as="r" hint-placeholder-count="3">
+        <div style="padding:30px 0 26px;display:flex;flex-direction:column;gap:10px;min-width:0;text-align:center;align-items:center">
+          <div style="font-family:'Gilroy',sans-serif;font-size:11px;font-weight:400;letter-spacing:0.26em;text-transform:uppercase;color:#6B6257">{{ r.kicker }}</div>
+          <div style="font-family:'Gilroy',sans-serif;font-size:19px;font-weight:400;line-height:1.3;text-transform:uppercase;letter-spacing:0.07em;max-width:24ch">{{ r.navn }}</div>
+          <div style="font-size:14.5px;font-weight:300;line-height:1.65;max-width:34ch">{{ r.tekst }}</div>
+          <sc-if value="{{ r.harAllergener }}" hint-placeholder-val="{{ true }}">
+            <div style="margin-top:auto;padding-top:6px;font-size:12.5px;font-weight:300;line-height:1.6;color:#6B6257">{{ r.allergener }}</div>
+          </sc-if>
+        </div>
+      </sc-for>
+    </div>
+
+    <div style="border-top:1px solid rgba(18,18,18,0.3);margin-top:8px;padding-top:32px;display:flex;align-items:flex-end;gap:28px;flex-wrap:wrap">
+      <div>
+        <div style="font-family:'Gilroy',sans-serif;font-size:clamp(26px,3vw,36px);font-weight:300;line-height:1;letter-spacing:0.01em">{{ menyPris }}</div>
+        <div style="font-family:'Gilroy',sans-serif;font-size:11px;font-weight:400;letter-spacing:0.26em;text-transform:uppercase;color:#6B6257;margin-top:10px">Per person, eks. mva</div>
+      </div>
+      <button onClick="{{ velgMeny }}" style="cursor:pointer;margin-left:auto;font-family:'Gilroy',sans-serif;background:#121212;border:1px solid #121212;color:#F6F0E9;border-radius:999px;padding:16px 32px;font-size:10.5px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase" style-hover="background:#F5B41A;border-color:#F5B41A;color:#121212">Bestill {{ menyTittel }}</button>
+    </div>
+  </div>
+</section>
+</sc-if>
+
+<sc-if value="{{ harValg }}" hint-placeholder-val="{{ false }}">
+  <div style="position:sticky;bottom:0;z-index:20;background:#F5B41A;color:#121212">
+    <div style="max-width:1400px;margin:0 auto;padding:16px 32px;display:flex;align-items:center;gap:18px;flex-wrap:wrap">
+      <div style="display:flex;flex-direction:column;gap:2px;margin-right:auto;min-width:0">
+        <span style="font-family:'Gilroy',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase">{{ valgtTekst }}</span>
+        <span style="font-family:'Gilroy',sans-serif;font-size:24px;font-weight:700;line-height:1.1">{{ valgtSum }}</span>
+      </div>
+      <label style="display:flex;align-items:center;gap:8px;font-family:'Gilroy',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase">
+        Gjester
+        <input type="number" min="1" value="{{ gjester }}" onChange="{{ setGjester }}" style="width:74px;border:1px solid #121212;background:#F6F0E9;color:#121212;border-radius:999px;padding:10px 14px;font-family:'Gilroy',sans-serif;font-size:14px;font-weight:700" />
+      </label>
+      <button onClick="{{ tomValg }}" style="cursor:pointer;font-family:'Gilroy',sans-serif;background:transparent;border:1px solid rgba(18,18,18,0.5);color:#121212;border-radius:999px;padding:12px 20px;font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase" style-hover="background:#121212;border-color:#121212;color:#F6F0E9">Tøm</button>
+      <a href="{{ mailto }}" style="font-family:'Gilroy',sans-serif;background:#121212;color:#F6F0E9;border-radius:999px;padding:14px 26px;font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none" style-hover="background:#121212">Send forespørsel</a>
+    </div>
+  </div>
+</sc-if>
+
+<footer style="margin-top:auto;background:#121212;color:#F6F0E9">
+  <div style="max-width:1400px;margin:0 auto;padding:44px 32px;display:flex;gap:32px;flex-wrap:wrap;align-items:flex-start;justify-content:space-between">
+    <div>
+      <div style="font-family:'Gilroy',sans-serif;font-weight:700;font-size:24px;letter-spacing:0.02em">HØYDEN</div>
+      <div style="font-size:13.5px;line-height:1.8;opacity:0.8;margin-top:8px">Construction City, 10. etasje<br />Standardveien 1, 0614 Oslo</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px;font-size:13.5px">
+      <a href="mailto:hoyden@compass-group.no" style="color:#F6F0E9">hoyden@compass-group.no</a>
+      <a href="mailto:booking@constructioncity.no" style="color:#F6F0E9">booking@constructioncity.no</a>
+    </div>
+  </div>
+</footer>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;: {&quot;width&quot;: 1280, &quot;height&quot;: 900}}">
+const MENYER = [
+  {
+    id: 'restaurant', label: 'Restaurant', tittel: 'Høstmeny', pris: 960,
+    lead: 'Tre retter satt sammen av sesongens råvarer.',
+    retter: [
+      { kicker: 'Forrett', navn: 'Ørret ceviche', tekst: 'Med søtpotetaioli, vannmelon, mango, vårløk, chili og søtpotetchips.', allergener: 'Allergener: fisk, sulfitt' },
+      { kicker: 'Varmrett', navn: 'Langtidsbakt kalv ytrefilet', tekst: 'Med sesongens asparges, pastinakkpuré, semitørket tomat, babyspinat, bakte perlepoteter og rødvinssaus med estragon.', allergener: 'Allergener: melk, sulfitt' },
+      { kicker: 'Dessert', navn: 'Norsk rabarbrakompott', tekst: 'Med ferske jordbær, mascarponekrem tilsmakt vanilje og kardemommecrumble.', allergener: 'Allergener: melk, gluten/hvete, egg' }
+    ]
+  },
+  {
+    id: 'lokal', label: 'Lokal', tittel: 'Lokal', pris: 875,
+    lead: 'Tre retter med norske råvarer og asiatiske toner.',
+    retter: [
+      { kicker: 'Forrett', navn: 'Biff tataki', tekst: 'Med wakame, ponzusaus og fritert hvitløk.', allergener: 'Allergener: soya, sesamfrø, sulfitt' },
+      { kicker: 'Varmrett', navn: 'Bakt kveite', tekst: 'Med miso- og teriyakiglaze, gresskarpuré, fondantpoteter og brokkolini.', allergener: 'Allergener: fisk, soya, melk' },
+      { kicker: 'Dessert', navn: 'Sjokolademousse', tekst: 'Med matcha, skogsbær og havrecrumble.', allergener: 'Allergener: egg, melk, gluten/hvete' }
+    ]
+  },
+  {
+    id: 'grill', label: 'Grillmeny', tittel: 'Grillmeny', pris: 825,
+    lead: 'Fra grillen med tilbehør til deling.',
+    retter: [
+      { kicker: 'Fra grillen', navn: 'Grillede kielbasapølser', tekst: 'Med chimichurri.', allergener: 'Allergener: sulfitt' },
+      { kicker: 'Fra grillen', navn: 'Grillet kyllinglår', tekst: 'Utbenet kyllinglår marinert i gochujang.', allergener: 'Allergener: hvete, soya' },
+      { kicker: 'Fra grillen', navn: 'Grillet scampi', tekst: 'Marinert i chili, lime og hvitløk.', allergener: 'Allergener: skalldyr' },
+      { kicker: 'Tilbehør', navn: 'Kremet potetsalat', tekst: 'Med epler og snittet purreløk.', allergener: 'Allergener: melk, sulfitt, sennep, egg' },
+      { kicker: 'Tilbehør', navn: 'Stekt sopp', tekst: 'Marinert i balsamico.', allergener: 'Allergener: sulfitt' },
+      { kicker: 'Tilbehør', navn: 'Vannmelonsalat', tekst: 'Med basilikum, rødløk, marinert salatost og jalapeños.', allergener: 'Allergener: melk, sulfitt' },
+      { kicker: 'Tilbehør', navn: 'Focaccia', tekst: 'Med rosmarin, havsalt, aioli og pisket smør.', allergener: 'Allergener: hvete, egg, sennep, melk' },
+      { kicker: 'Dessert', navn: 'Jordbær «cake in a jar»', tekst: 'Med sukkerbrød, sitroncurd, kondensert melk og krem.', allergener: 'Allergener: hvete, melk, egg' }
+    ]
+  },
+  {
+    id: 'storgrill', label: 'Stor grillmeny', tittel: 'Stor grillmeny', pris: 930,
+    lead: 'Utvidet grillmeny for de større selskapene.',
+    retter: [
+      { kicker: 'Fra grillen', navn: 'Grillede kielbasapølser', tekst: 'Med chimichurri.', allergener: 'Allergener: sulfitt' },
+      { kicker: 'Fra grillen', navn: 'Grillet kyllinglår', tekst: 'Utbenet kyllinglår marinert i gochujang.', allergener: 'Allergener: hvete, soya' },
+      { kicker: 'Fra grillen', navn: 'Grillet scampi', tekst: 'Marinert i chili, lime og hvitløk.', allergener: 'Allergener: skalldyr' },
+      { kicker: 'Fra grillen', navn: 'Grillet spareribs', tekst: 'Med hjemmelaget BBQ-saus.', allergener: 'Allergener: sennep, sulfitt, soya' },
+      { kicker: 'Tilbehør', navn: 'Stekte nypoteter', tekst: 'Med friske urter.', allergener: '' },
+      { kicker: 'Tilbehør', navn: 'Sommerslaw', tekst: 'Med syrlige epler.', allergener: 'Allergener: sulfitt, egg, sennep' },
+      { kicker: 'Tilbehør', navn: 'Kremet potetsalat', tekst: 'Med epler og snittet purreløk.', allergener: 'Allergener: melk, sulfitt, sennep, egg' },
+      { kicker: 'Tilbehør', navn: 'Stekt sopp', tekst: 'Marinert i balsamico.', allergener: 'Allergener: sulfitt' },
+      { kicker: 'Tilbehør', navn: 'Vannmelonsalat', tekst: 'Med basilikum, rødløk, marinert salatost og jalapeños.', allergener: 'Allergener: melk, sulfitt' },
+      { kicker: 'Tilbehør', navn: 'Focaccia', tekst: 'Med rosmarin, havsalt, aioli og pisket smør.', allergener: 'Allergener: hvete, egg, sennep, melk' },
+      { kicker: 'Tilbehør', navn: 'Grillet pitabrød', tekst: 'Med urter og hvitløk.', allergener: 'Allergener: hvete' },
+      { kicker: 'Dessert', navn: 'Jordbær «cake in a jar»', tekst: 'Med sukkerbrød, sitroncurd, kondensert melk og krem.', allergener: 'Allergener: hvete, melk, egg' }
+    ]
+  }
+];
+
+class Component extends DCLogic {
+  state = { side: 'restaurant', aktiv: 'restaurant', valgt: [], gjester: 20 };
+
+  renderVals() {
+    const kr = (n) => n.toLocaleString('nb-NO') + ',-';
+    const cur = MENYER.find((m) => m.id === this.state.aktiv) || MENYER[0];
+    const valgt = this.state.valgt;
+    const gjester = this.state.gjester || 0;
+    const sum = valgt.reduce((a, id) => {
+      const m = MENYER.find((x) => x.id === id);
+      return a + (m ? m.pris : 0);
+    }, 0) * gjester;
+    const linjer = valgt.map((id) => {
+      const m = MENYER.find((x) => x.id === id);
+      return m ? m.tittel + ' – ' + m.pris + ',- per person' : '';
+    });
+    const body = 'Hei!\n\nVi ønsker å bestille i Høyden Restaurant:\n\n' + linjer.join('\n') +
+      '\n\nAntall gjester: ' + gjester +
+      '\nEstimert sum: ' + sum + ',- eks. mva' +
+      '\n\nDato:\nKlokkeslett:\nAnledning:\nAllergier:\n\nVennlig hilsen\n';
+
+    const side = this.state.side;
+    return {
+      sider: [
+        { id: 'restaurant', label: 'Restaurant' },
+        { id: 'meny', label: 'Selskapsmeny' }
+      ].map((s) => ({
+        label: s.label,
+        active: s.id === side,
+        idle: s.id !== side,
+        go: () => { this.setState({ side: s.id }); if (typeof window !== 'undefined') window.scrollTo(0, 0); }
+      })),
+      visRestaurant: side === 'restaurant',
+      visMeny: side === 'meny',
+      tilMeny: () => { this.setState({ side: 'meny' }); if (typeof window !== 'undefined') window.scrollTo(0, 0); },
+      tabs: MENYER.map((m) => ({
+        label: m.label,
+        active: m.id === this.state.aktiv,
+        idle: m.id !== this.state.aktiv,
+        go: () => this.setState({ aktiv: m.id })
+      })),
+      menyTittel: cur.tittel,
+      menyLead: cur.lead,
+      menyPris: kr(cur.pris),
+      rettAntall: cur.retter.length + (cur.retter.length === 1 ? ' rett' : ' retter'),
+      retter: cur.retter.map((r) => ({
+        kicker: r.kicker,
+        navn: r.navn,
+        tekst: r.tekst,
+        allergener: r.allergener || 'Ingen oppgitte allergener',
+        harAllergener: true
+      })),
+      velgMeny: () => this.setState((s) => ({
+        valgt: s.valgt.indexOf(cur.id) === -1 ? s.valgt.concat([cur.id]) : s.valgt
+      })),
+      tomValg: () => this.setState({ valgt: [] }),
+      harValg: valgt.length > 0,
+      valgtTekst: valgt.length + (valgt.length === 1 ? ' meny valgt' : ' menyer valgt'),
+      valgtSum: kr(sum) + ' eks. mva',
+      gjester: String(gjester),
+      setGjester: (e) => this.setState({ gjester: Number(e.target.value) || 0 }),
+      mailto: 'mailto:hoyden@compass-group.no?subject=' +
+        encodeURIComponent('Forespørsel – Høyden Restaurant') + '&body=' + encodeURIComponent(body)
+    };
+  }
+}
+
+</script>
+</body>
+</html>

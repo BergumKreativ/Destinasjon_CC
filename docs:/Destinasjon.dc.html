@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<![CDATA[<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+<link href="https://fonts.googleapis.com/css2?family=Gloock&display=swap" rel="stylesheet" />
+<script src="./image-slot.js"></script>
+<script src="./data.js"></script>
+<style>
+  @font-face { font-family:'PP Neue Machina'; src:url('assets/fonts/PPNeueMachina-PlainRegular.otf') format('opentype'); font-weight:400; font-style:normal; font-display:swap; }
+  @font-face { font-family:'PP Neue Machina'; src:url('assets/fonts/PPNeueMachina-PlainUltrabold.otf') format('opentype'); font-weight:800; font-style:normal; font-display:swap; }
+  @font-face { font-family:'PP Neue Machina'; src:url('assets/fonts/PPNeueMachina-PlainLight.otf') format('opentype'); font-weight:300; font-style:normal; font-display:swap; }
+  @font-face { font-family:'Gilroy'; src:url('assets/fonts/Gilroy-Light.otf') format('opentype'); font-weight:300; font-style:normal; font-display:swap; }
+  @font-face { font-family:'Gilroy'; src:url('assets/fonts/Gilroy-Light.otf') format('opentype'); font-weight:400; font-style:normal; font-display:swap; }
+  @font-face { font-family:'Gilroy'; src:url('assets/fonts/Gilroy-ExtraBold.otf') format('opentype'); font-weight:700; font-style:normal; font-display:swap; }
+  @font-face { font-family:'Rayton Brink'; src:url('assets/fonts/RaytonBrink-Regular.otf') format('opentype'); font-weight:400; font-style:normal; font-display:swap; }
+  @font-face { font-family:'Rayton Brink'; src:url('assets/fonts/RaytonBrink-Italic.otf') format('opentype'); font-weight:400; font-style:italic; font-display:swap; }
+  html, body { margin:0; padding:0; background:#F6F0E9; }
+  body { font-family:'Gilroy',system-ui,sans-serif; font-weight:300; color:#0F2B2E; -webkit-font-smoothing:antialiased; text-wrap:pretty; }
+  * { box-sizing:border-box; }
+  a { color:#0F2B2E; text-decoration:underline; text-underline-offset:3px; }
+  a:hover { color:#012027; }
+  button, input, select, textarea { font-family:inherit; }
+</style>
+</helmet>
+
+<div style="min-height:100vh;display:flex;flex-direction:column;background:#F6F0E9">
+
+<header style="position:relative;z-index:60;background:#0F2B2E;color:#F6F0E9">
+  <sc-if value="{{ notMotemat }}" hint-placeholder-val="{{ true }}">
+    <div style="position:absolute;inset:0;overflow:hidden">
+      <image-slot id="{{ heroSlot }}" src="{{ heroSrc }}" shape="rect" fit="cover" placeholder="Toppbilde"></image-slot>
+    </div>
+    <div style="position:absolute;left:0;right:0;top:0;height:62%;background:linear-gradient(to bottom,rgba(15,43,46,0.72) 0%,rgba(15,43,46,0.5) 40%,rgba(15,43,46,0.22) 72%,rgba(15,43,46,0) 100%);pointer-events:none"></div>
+    <sc-if value="{{ showVicinoLogo }}" hint-placeholder-val="{{ false }}">
+      <img src="assets/cc/vicino-logo.webp" alt="Trattoria Vicino" style="position:absolute;left:32px;bottom:28px;width:clamp(120px,14vw,190px);height:auto;pointer-events:none;filter:brightness(0) invert(1) sepia(0.18) saturate(0.6) hue-rotate(340deg)" />
+    </sc-if>
+  </sc-if>
+  <sc-if value="{{ isMotemat }}" hint-placeholder-val="{{ false }}">
+    <div style="position:absolute;inset:0;background:#E8412A"></div>
+  </sc-if>
+  <div style="position:relative;max-width:1400px;margin:0 auto;padding:26px 32px 24px;display:flex;align-items:flex-start;gap:24px">
+    <button onClick="{{ goHome }}" style="background:none;border:none;padding:0;cursor:pointer;flex:0 0 auto">
+      <img src="assets/cc-logo-hvit.png" alt="Construction City" style="height:56px;width:auto;display:block" />
+    </button>
+    <div style="flex:1 1 auto;text-align:center;font-family:'Gilroy',sans-serif;font-weight:700;font-size:clamp(20px,2.6vw,34px);letter-spacing:0.2em;text-transform:uppercase;padding-top:4px">Destinasjon</div>
+    <button onClick="{{ goBooking }}" style="cursor:pointer;flex:0 0 auto;width:86px;height:86px;border-radius:50%;border:1px solid #012027;background:#012027;color:#F6F0E9;font-family:'Gilroy',sans-serif;font-size:11.5px;font-weight:700;letter-spacing:0.04em;line-height:1.45;padding:10px" style-hover="background:#F6F0E9;color:#012027">Kontakt &amp;<br />booking</button>
+  </div>
+  <div style="position:relative;max-width:1400px;margin:0 auto;padding:0 32px 26px;display:flex;gap:8px;flex-wrap:wrap;justify-content:center">
+    <sc-for list="{{ navItems }}" as="n" hint-placeholder-count="5">
+      <sc-if value="{{ n.active }}" hint-placeholder-val="{{ false }}">
+        <button onClick="{{ n.go }}" style="cursor:pointer;font-family:'Gilroy',sans-serif;border:none;background:#012027;color:#FFFFFF;border-radius:999px;padding:11px 20px;font-size:10px;font-weight:800;letter-spacing:0.09em;text-transform:uppercase;white-space:nowrap">{{ n.label }}</button>
+      </sc-if>
+      <sc-if value="{{ n.idle }}" hint-placeholder-val="{{ true }}">
+        <button onClick="{{ n.go }}" style="cursor:pointer;font-family:'Gilroy',sans-serif;border:none;background:#FFFFFF;color:#012027;border-radius:999px;padding:11px 20px;font-size:10px;font-weight:800;letter-spacing:0.09em;text-transform:uppercase;white-space:nowrap" style-hover="background:#012027;color:#FFFFFF">{{ n.label }}</button>
+      </sc-if>
+    </sc-for>
+  </div>
+  <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+    <div style="position:absolute;left:0;right:0;bottom:0;height:78%;background:linear-gradient(to bottom,rgba(1,32,39,0) 0%,rgba(1,32,39,0.3) 30%,rgba(1,32,39,0.62) 58%,rgba(1,32,39,0.82) 100%);pointer-events:none"></div>
+    <div style="position:relative;max-width:1400px;margin:0 auto;padding:clamp(140px,22vw,300px) 32px 64px;text-align:center">
+      <h1 style="font-family:'Gloock',serif;font-weight:400;font-size:clamp(40px,6.4vw,88px);line-height:1.02;margin:0 0 22px">Over Oslo på Ulven</h1>
+      <p style="font-size:clamp(17px,2vw,22px);line-height:1.45;margin:0 auto 18px;max-width:34ch">Construction City er mer enn et kontorbygg – det er en destinasjon for hele arbeidsdagen.</p>
+      <p style="font-size:15px;line-height:1.65;margin:0 auto 32px;max-width:62ch">Med treningssenter, møtefasiliteter, styrelounge, restauranter og sosiale møteplasser skaper vi et levende hus som inviterer til bruk fra morgen til kveld.</p>
+      <button onClick="{{ goServering }}" style="cursor:pointer;font-family:'Gilroy',sans-serif;border:1px solid #F6F0E9;background:transparent;color:#F6F0E9;border-radius:999px;padding:16px 40px;font-size:11px;font-weight:800;letter-spacing:0.08em" style-hover="background:#F6F0E9;color:#0F2B2E">Sjekk inn her</button>
+    </div>
+  </sc-if>
+  <sc-if value="{{ isMotemat }}" hint-placeholder-val="{{ false }}">
+    <div style="position:relative;max-width:1400px;margin:0 auto;padding:36px 32px 56px;display:flex;gap:32px;flex-wrap:wrap;align-items:center;justify-content:center">
+      <div style="flex:0 0 auto;width:clamp(90px,12vw,170px);aspect-ratio:3/4;position:relative">
+        <img src="assets/illu/wellmade-servering.png" alt="" style="width:100%;height:100%;object-fit:contain" />
+      </div>
+      <div style="flex:0 1 auto;font-family:'Rayton Brink','Gilroy',sans-serif;font-weight:400;font-size:clamp(56px,11vw,150px);line-height:0.9;text-align:center;color:#F6F0E9">Wellmade</div>
+      <div style="flex:0 0 auto;width:clamp(90px,12vw,170px);aspect-ratio:3/4;position:relative">
+        <img src="assets/illu/wellmade-kaffe.png" alt="" style="width:100%;height:100%;object-fit:contain" />
+      </div>
+    </div>
+  </sc-if>
+  <sc-if value="{{ showSpacer }}" hint-placeholder-val="{{ false }}">
+    <div style="position:relative;height:clamp(240px,34vw,430px)"></div>
+  </sc-if>
+</header>
+
+<main style="flex:1 1 auto">
+
+<sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+  <section data-screen-label="Forside" style="max-width:1400px;margin:0 auto;padding:88px 32px 24px">
+    <div style="display:flex;align-items:baseline;justify-content:space-between;gap:32px;flex-wrap:wrap;margin-bottom:8px">
+      <h2 style="font-family:'Gloock',serif;font-weight:400;font-size:clamp(28px,3.4vw,46px);margin:0">Velg din destinasjon</h2>
+      <p style="margin:0;max-width:44ch;font-size:15px;line-height:1.7;opacity:0.8">Start dagen med trening, ta møtene i inspirerende omgivelser, spis lunsj i foodcourten og avslutt med middag eller kundearrangement på Høyden.</p>
+    </div>
+  </section>
+
+  <section style="max-width:1400px;margin:0 auto;padding:0 32px 40px">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2px 40px">
+      <sc-for list="{{ tiles }}" as="t" hint-placeholder-count="6">
+        <button onClick="{{ t.go }}" style="cursor:pointer;text-align:left;border:none;background:none;padding:8px 0 36px;display:flex;flex-direction:column;gap:18px;color:#0F2B2E" style-hover="opacity:0.72">
+          <div style="display:flex;align-items:baseline;gap:14px">
+            <span style="font-family:'Gilroy',sans-serif;font-size:11px;letter-spacing:0.1em;opacity:0.45">{{ t.num }}</span>
+            <span style="font-family:'Gilroy',sans-serif;font-size:9.5px;letter-spacing:0.18em;text-transform:uppercase;opacity:0.6">{{ t.kicker }}</span>
+          </div>
+          <div style="position:relative;width:100%;aspect-ratio:4/3;overflow:hidden">
+            <image-slot id="{{ t.slot }}" src="{{ t.src }}" shape="rect" placeholder="Bilde"></image-slot>
+          </div>
+          <div style="font-family:'Gloock',serif;font-size:clamp(24px,2.2vw,30px);line-height:1.15">{{ t.title }}</div>
+          <div style="font-size:14px;line-height:1.7;opacity:0.8;max-width:38ch">{{ t.lead }}</div>
+          <div style="display:flex;gap:7px;flex-wrap:wrap">
+            <sc-for list="{{ t.tags }}" as="tag" hint-placeholder-count="3">
+              <span style="border:1px solid rgba(15,43,46,0.25);border-radius:999px;padding:5px 12px;font-size:10.5px;opacity:0.78">{{ tag.text }}</span>
+            </sc-for>
+          </div>
+        </button>
+      </sc-for>
+    </div>
+  </section>
+
+  <section style="max-width:1400px;margin:0 auto;padding:40px 32px 100px">
+    <div style="border-top:1px solid rgba(15,43,46,0.18);padding-top:40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:40px">
+      <div>
+        <div style="font-family:'Gilroy',sans-serif;font-size:9.5px;letter-spacing:0.18em;text-transform:uppercase;opacity:0.55;margin-bottom:16px">Book bord hos Vicino</div>
+        <p style="margin:0 0 20px;font-size:15px;line-height:1.75">Bord hos Trattoria Vicino bookes direkte hos restauranten. Høyden Restaurant bookes på e-post til hoyden@compass-group.no.</p>
+        <a href="https://www.vicino.no" target="_blank" rel="noopener" style="display:inline-block;font-family:'Gilroy',sans-serif;background:#012027;color:#F6F0E9;text-decoration:none;border-radius:999px;padding:14px 24px;font-size:10px;font-weight:400;letter-spacing:0.12em;text-transform:uppercase">Book bord →</a>
+      </div>
+      <div>
+        <div style="font-family:'Gilroy',sans-serif;font-size:9.5px;letter-spacing:0.18em;text-transform:uppercase;opacity:0.55;margin-bottom:16px">Lokaler og arrangement</div>
+        <p style="margin:0 0 20px;font-size:15px;line-height:1.75">Styrerom, takterrasse, Glasshallen og selskap på Høyden starter som en samtale. Send en forespørsel, så svarer riktig person.</p>
+        <button onClick="{{ goBooking }}" style="cursor:pointer;font-family:'Gilroy',sans-serif;background:transparent;border:1px solid #0F2B2E;color:#0F2B2E;border-radius:999px;padding:14px 24px;font-size:10px;font-weight:400;letter-spacing:0.12em;text-transform:uppercase" style-hover="background:#0F2B2E;color:#F6F0E9">Send forespørsel</button>
+      </div>
+      <div>
+        <div style="font-family:'Gilroy',sans-serif;font-size:9.5px;letter-spacing:0.18em;text-transform:uppercase;opacity:0.55;margin-bottom:16px">Møtemat</div>
+        <p style="margin:0 0 20px;font-size:15px;line-height:1.75">Wellmade leverer pakker og à la carte til møtet. Se menyen, og skriv ønsket servering i forespørselen — den går til møtevert.</p>
+        <button onClick="{{ goMotemat }}" style="cursor:pointer;font-family:'Gilroy',sans-serif;background:transparent;border:1px solid #0F2B2E;color:#0F2B2E;border-radius:999px;padding:14px 24px;font-size:10px;font-weight:400;letter-spacing:0.12em;text-transform:uppercase" style-hover="background:#0F2B2E;color:#F6F0E9">Se møtemat-menyen</button>
+      </div>
+    </div>
+  </section>
+</sc-if>
+
+<sc-if value="{{ isSection }}" hint-placeholder-val="{{ false }}">
+  <div style="background:#FFFFFF">
+    <div style="max-width:1400px;margin:0 auto;padding:26px 32px 6px;display:flex;gap:8px;flex-wrap:wrap">
+      <sc-for list="{{ secTabs }}" as="t" hint-placeholder-count="4">
+        <sc-if value="{{ t.active }}" hint-placeholder-val="{{ false }}">
+          <button onClick="{{ t.go }}" style="cursor:pointer;font-family:'Gilroy',sans-serif;background:#012027;border:none;color:#FFFFFF;border-radius:999px;padding:11px 20px;font-size:10px;font-weight:800;letter-spacing:0.07em">{{ t.label }}</button>
+        </sc-if>
+        <sc-if value="{{ t.idle }}" hint-placeholder-val="{{ true }}">
+          <button onClick="{{ t.go }}" style="cursor:pointer;font-family:'Gilroy',sans-serif;background:#FFFFFF;border:1px solid #012027;color:#012027;border-radius:999px;padding:11px 20px;font-size:10px;font-weight:800;letter-spacing:0.07em" style-hover="background:#012027;color:#FFFFFF">{{ t.label }}</button>
+        </sc-if>
+      </sc-for>
+    </div>
+  </div>
+
+  <section style="background:#FFFFFF;box-shadow:0 0 0 100vmax #FFFFFF;clip-path:inset(0 -100vmax);max-width:1400px;margin:0 auto;padding:56px 32px 90px;display:flex;gap:72px;flex-wrap:wrap;align-items:flex-start">
+    <div style="flex:1 1 400px;min-width:0">
+      <h1 style="font-family:'Gloock',serif;font-weight:400;font-size:clamp(34px,4.4vw,58px);line-height:1.08;margin:0 0 22px;max-width:15ch">{{ secTitle }}</h1>
+      <p style="font-size:20px;line-height:1.5;font-weight:400;margin:0 0 26px;max-width:32ch">{{ secLead }}</p>
+      <div style="width:68px;height:1px;background:#0F2B2E;margin:0 0 26px"></div>
+      <div style="display:flex;flex-direction:column;gap:16px;max-width:54ch">
+        <sc-for list="{{ secParas }}" as="p" hint-placeholder-count="3">
+          <p style="margin:0;font-size:15px;line-height:1.8">{{ p.text }}</p>
+        </sc-for>
+      </div>
+      <sc-if value="{{ secHasSuitable }}" hint-placeholder-val="{{ false }}">
+        <div style="margin-top:36px;border-top:1px solid rgba(15,43,46,0.22);padding-top:22px">
+          <div style="font-family:'Gilroy',sans-serif;font-size:9.5px;letter-spacing:0.18em;text-transform:uppercase;opacity:0.55;margin-bottom:14px">Passer for</div>
+          <div style="display:flex;gap:7px;flex-wrap:wrap">
+            <sc-for list="{{ secSuitable }}" as="s" hint-placeholder-count="4">
+              <span style="border:1px solid rgba(15,43,46,0.25);border-radius:999px;padding:7px 14px;font-size:12px">{{ s.text }}</span>
+            </sc-for>
+          </div>
+        </div>
+      </sc-if>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:36px">
+        <sc-for list="{{ secBook }}" as="b" hint-placeholder-count="1">
+          <a href="{{ b.href }}" target="_blank" rel="noopener" style="font-family:'Gilroy',sans-serif;background:#012027;color:#F6F0E9;text-decoration:none;border-radius:999px;padding:16px 26px;font-size:10px;font-weight:400;letter-spacing:0.12em;text-transform:uppercase">{{ b.label }}</a>
+        </sc-for>
+        <sc-for list="{{ secLink }}" as="l" hint-placeholder-count="1">
+          <a href="{{ l.href }}" target="_blank" rel="noopener" style="font-family:'Gilroy',sans-serif;background:transparent;border:1px solid #012027;color:#012027;text-decoration:none;border-radius:999px;padding:16px 26px;font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase" style-hover="background:#012027;color:#F6F0E9">{{ l.label }}</a>
+        </sc-for>
+        <sc-for list="{{ secAsk }}" as="a" hint-placeholder-count="1">
+          <button onClick="{{ a.go }}" style="cursor:pointer;font-family:'Gilroy',sans-serif;background:#0F2B2E;border:1px solid #0F2B2E;color:#F6F0E9;border-radius:999px;padding:16px 26px;font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase" style-hover="background:#012027;border:1px solid #012027">{{ a.label }}</button>
+        </sc-for>
+      </div>
+    </div>
+
+    <div style="flex:1 1 440px;min-width:0;display:flex;flex-direction:column;gap:18px">
+      <div style="position:relative;width:100%;aspect-ratio:16/11;overflow:hidden">
+        <image-slot id="{{ secImgA }}" src="{{ secSrcA }}" shape="rect" placeholder="Hovedbilde"></image-slot>
+        <sc-if value="{{ secHasSticker }}" hint-placeholder-val="{{ false }}">
+          <button onClick="{{ secStickerGo }}" style="cursor:pointer;position:absolute;left:26px;top:26px;width:126px;height:126px;border-radius:50%;background:#012027;border:none;color:#F6F0E9;display:flex;align-items:center;justify-content:center;text-align:center;padding:18px;font-family:'Gilroy',sans-serif;font-size:9.5px;font-weight:800;letter-spacing:0.09em;text-transform:uppercase;line-height:1.6" style-hover="background:#E8412A">{{ secSticker }}</button>
+        </sc-if>
+      </div>
+      <sc-if value="{{ secHasCaption }}" hint-placeholder-val="{{ false }}">
+        <p style="margin:0;font-size:13.5px;line-height:1.65;opacity:0.85;max-width:52ch">{{ secCaption }}</p>
+      </sc-if>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+        <div style="position:relative;width:100%;aspect-ratio:1/1;overflow:hidden">
+          <image-slot id="{{ secImgB }}" src="{{ secSrcB }}" shape="rect" placeholder="Detalj"></image-slot>
+        </div>
+        <div style="position:relative;width:100%;aspect-ratio:1/1;overflow:hidden">
+          <image-slot id="{{ secImgC }}" src="{{ secSrcC }}" shape="rect" placeholder="Detalj"></image-slot>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <sc-if value="{{ secHasInfo }}" hint-placeholder-val="{{ false }}">
+    <section style="background:#0F2B2E;color:#F6F0E9">
+      <div style="max-width:1400px;margin:0 auto;padding:72px 32px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:48px">
+        <div>
+          <div style="font-family:'Gilroy',sans-serif;font-size:9.5px;letter-spacing:0.18em;text-transform:uppercase;opacity:0.55;margin-bottom:18px">Åpningstider</div>
+          <div style="font-family:'Gloock',serif;font-size:26px;margin-bottom:10px">Construction City</div>
+          <p style="margin:0 0 22px;font-size:14.5px;line-height:1.75;opacity:0.85">Mandag–fredag 07.00–17.00<br />Tilgang utenom åpningstid styres via adgangskontroll.</p>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <sc-for list="{{ hours }}" as="h" hint-placeholder-count="5">
+              <div style="display:flex;justify-content:space-between;gap:16px;font-size:14px;border-bottom:1px solid rgba(246,240,233,0.16);padding-bottom:9px">
+                <span>{{ h.name }}</span><span style="opacity:0.8;text-align:right">{{ h.time }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+        <div>
+          <div style="font-family:'Gilroy',sans-serif;font-size:9.5px;letter-spacing:0.18em;text-transform:uppercase;opacity:0.55;margin-bottom:18px">Parkering og adkomst</div>
+          <p style="margin:0 0 16px;font-size:14.5px;line-height:1.8;opacity:0.9">Construction City har flere parkeringsplan med både korttids- og langtidsparkering for ansatte og besøkende. Parkeringsområdene har direkte adkomst til bygget og ladestasjoner for elbil.</p>
+          <p style="margin:0;font-size:14.5px;line-height:1.8;opacity:0.9">Det er også enkel adkomst med kollektivtransport. Bygget ligger i gangavstand til Økern T, Ulvenkrysset og Ulven Torg, med nærmeste bussholdeplass på Ulven Torg.</p>
+        </div>
+        <div>
+          <div style="font-family:'Gilroy',sans-serif;font-size:9.5px;letter-spacing:0.18em;text-transform:uppercase;opacity:0.55;margin-bottom:18px">Adresse</div>
+          <div style="font-family:'Gloock',serif;font-size:30px;line-height:1.3;margin-bottom:28px">Standardveien 1<br />0614 Oslo</div>
+          <button onClick="{{ goBooking }}" style="cursor:pointer;font-family:'Gilroy',sans-serif;background:transparent;border:1px solid rgba(246,240,233,0.5);color:#F6F0E9;border-radius:999px;padding:15px 24px;font-size:10px;font-weight:400;letter-spacing:0.12em;text-transform:uppercase" style-hover="background:#F6F0E9;color:#0F2B2E">Kontaktpersoner</button>
+        </div>
+      </div>
+    </section>
+  </sc-if>
+</sc-if>
+
+<sc-if value="{{ isHoyden }}" hint-placeholder-val="{{ false }}">
+  <section data-screen-label="Høyden" style="max-width:1400px;margin:0 auto;padding:56px 32px 0">
+    <div style="font-family:'Gilroy',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;opacity:0.6;margin-bottom:20px">10. etasje · Construction City</div>
+    <h1 style="font-family:'Gloock',serif;font-weight:400;font-size:clamp(40px,5.6vw,78px);line-height:1.02;margin:0 0 22px">Høyden Restaurant</h1>
+    <p style="font-size:20px;max-width:38ch;margin:0 0 30px;line-height:1.45">Et bedre måltid, et møte eller en markering – litt over hverdagen.</p>
+    <div style="display:flex;gap:12px;flex-wrap:wrap">
+      <a href="mailto:hoyden@compass-group.no" style="font-family:'Gilroy',sans-serif;background:#012027;color:#F6F0E9;text-decoration:none;border-radius:999px;padding:16px 28px;font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase" style-hover="background:#F5B41A;color:#121212">Book på e-post →</a>
+      <a href="Hoyden.dc.html" style="font-family:'Gilroy',sans-serif;background:#F5B41A;color:#121212;text-decoration:none;border-radius:999px;padding:16px 28px;font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase" style-hover="background:#121212;color:#F5B41A">Menyer &amp; selskap →</a>
+      <button onClick="{{ goBooking }}" style="cursor:pointer;font-family:'Gilroy',sans-serif;background:#0F2B2E;border:1px solid #0F2B2E;color:#F6F0E9;border-radius:999px;padding:16px 28px;font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase" style-hover="background:#F5B41A;border:1px solid #F5B41A;color:#121212">Book selskap</button>
+    </div>
+  </section>
+
+  <section style="max-width:1400px;margin:0 auto;padding:84px 32px 24px;display:flex;gap:72px;flex-wrap:wrap;align-items:flex-start">
+    <div style="flex:1 1 420px;min-width:0">
+      <h2 style="font-family:'Gloock',serif;font-weight:400;font-size:clamp(30px,3.6vw,48px);line-height:1.12;margin:0 0 26px">Høyt over atriet og pulsen i huset</h2>
+      <p style="margin:0 0 16px;font-size:15px;line-height:1.8">I 10. etasje ligger Høyden Restaurant. Her kan leietakere, gjester og besøkende samles til måltider, møter og markeringer med panoramautsikt over Oslo.</p>
+      <p style="margin:0 0 16px;font-size:15px;line-height:1.8">Høyden passer for middager, kundearrangementer, selskaper og anledninger som fortjener litt ekstra. Opplevelsen kan også kombineres med privat lounge, styrerom eller takterrasse etter behov.</p>
+      <p style="margin:0;font-size:15px;line-height:1.8">Med direkte tilgang til takterrassen kan arrangementet fortsette ute når været tillater det – med byen som bakteppe.</p>
+    </div>
+    <div style="flex:1 1 380px;min-width:0;position:relative">
+      <div style="position:relative;width:100%;aspect-ratio:4/3;overflow:hidden">
+        <image-slot id="hoyden-sal" src="assets/cc/hoyden-glass.jpg" shape="rect" placeholder="Høyden – restaurantsalen"></image-slot>
+      </div>
+      <button onClick="{{ goBooking }}" style="cursor:pointer;position:absolute;right:-16px;top:-36px;width:154px;height:154px;border-radius:50%;background:#012027;border:none;color:#F6F0E9;display:flex;align-items:center;justify-content:center;text-align:center;padding:22px;font-family:'Gilroy',sans-serif;font-size:10px;font-weight:400;letter-spacing:0.11em;text-transform:uppercase;line-height:1.7;transform:rotate(-8deg)" style-hover="background:#0F2B2E">Ta kontakt for sesongens meny</button>
+    </div>
+  </section>
+
+  <section style="max-width:1400px;margin:0 auto;padding:56px 32px 100px">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:40px">
+      <sc-for list="{{ hoydenCards }}" as="c" hint-placeholder-count="3">
+        <div style="border-top:1px solid rgba(15,43,46,0.25);padding-top:26px;display:flex;flex-direction:column;gap:16px">
+          <div style="position:relative;width:100%;aspect-ratio:4/3;overflow:hidden">
+            <image-slot id="{{ c.slot }}" src="{{ c.src }}" shape="rect" placeholder="Bilde"></image-slot>
+          </div>
+          <div style="font-family:'Gloock',serif;font-size:24px">{{ c.title }}</div>
+          <div style="font-size:14px;line-height:1.7;opacity:0.8">{{ c.text }}</div>
+          <button onClick="{{ c.go }}" style="cursor:pointer;margin-top:auto;align-self:flex-start;font-family:'Gilroy',sans-serif;background:transparent;border:1px solid #0F2B2E;color:#0F2B2E;border-radius:999px;padding:12px 20px;font-size:9.5px;font-weight:400;letter-spacing:0.12em;text-transform:uppercase" style-hover="background:#0F2B2E;color:#F6F0E9">{{ c.cta }}</button>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+</sc-if>
+
+<sc-if value="{{ isFoodcourt }}" hint-placeholder-val="{{ false }}">
+  <section data-screen-label="Foodcourt" style="max-width:1400px;margin:0 auto;padding:56px 32px 0;display:flex;gap:48px;flex-wrap:wrap;align-items:flex-end">
+    <div style="flex:1 1 420px;min-width:0">
+      <div style="font-family:'Gilroy',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;opacity:0.6;margin-bottom:20px">Foodcourt &amp; kaffebarer</div>
+      <h1 style="font-family:'Gloock',serif;font-weight:400;font-size:clamp(36px,5vw,70px);line-height:1.04;margin:0 0 20px;max-width:14ch">Smaker fra flere verdenshjørner</h1>
+      <p style="font-size:18px;line-height:1.55;max-width:40ch;margin:0">Lunsjretter, street food og friske alternativer samlet på ett sted.</p>
+    </div>
+    <div style="flex:0 0 auto;border-left:1px solid rgba(15,43,46,0.25);padding-left:24px">
+      <div style="font-family:'Gilroy',sans-serif;font-size:9.5px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;opacity:0.6;margin-bottom:8px">Åpent</div>
+      <div style="font-family:'Gloock',serif;font-size:32px;line-height:1.25">Man–fre<br />10.30–13.30</div>
+    </div>
+  </section>
+
+  <section style="max-width:1400px;margin:0 auto;padding:84px 32px 24px">
+    <div style="display:flex;align-items:baseline;justify-content:space-between;gap:32px;flex-wrap:wrap;border-bottom:1px solid #0F2B2E;padding-bottom:18px;margin-bottom:36px">
+      <h2 style="font-family:'Gloock',serif;font-weight:400;font-size:clamp(26px,3vw,40px);margin:0">Konseptene</h2>
+      <p style="margin:0;max-width:48ch;font-size:14.5px;line-height:1.7;opacity:0.8">Varme retter, friske alternativer, streetfood, bowls, salater, pizza og hverdagsfavoritter fra de ulike konseptene.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:24px">
+      <sc-for list="{{ concepts }}" as="c" hint-placeholder-count="6">
+        <div style="display:flex;flex-direction:column;gap:12px;min-width:0">
+          <div style="width:72px;height:72px;border-radius:50%;overflow:hidden;position:relative;background:#FFFFFF">
+            <image-slot id="{{ c.slot }}" src="{{ c.src }}" shape="circle" fit="contain" placeholder="Logo"></image-slot>
+          </div>
+          <div style="font-family:'Gloock',serif;font-size:19px;line-height:1.2">{{ c.name }}</div>
+          <div style="font-size:12.5px;line-height:1.6;opacity:0.78">{{ c.text }}</div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section style="max-width:1400px;margin:0 auto;padding:64px 32px 40px">
+    <div style="background:#0F2B2E;color:#F6F0E9;padding:44px;display:flex;gap:40px;flex-wrap:wrap;align-items:center;justify-content:space-between">
+      <div style="flex:1 1 340px;min-width:0">
+        <div style="font-family:'Gilroy',sans-serif;font-size:9.5px;letter-spacing:0.18em;text-transform:uppercase;opacity:0.7;margin-bottom:14px">Dagens</div>
+        <div style="font-family:'Gloock',serif;font-size:clamp(26px,3.2vw,40px);line-height:1.15">Dagens rett oppdateres hver morgen</div>
+        <div style="font-size:15px;margin-top:12px;opacity:0.9;max-width:46ch">Møter i huset kan bestille lunsjbong til Foodcourt som en del av dagpakken.</div>
+      </div>
+      <button onClick="{{ goMotemat }}" style="cursor:pointer;font-family:'Gilroy',sans-serif;background:#F6F0E9;border:none;color:#0F2B2E;border-radius:999px;padding:16px 26px;font-size:10px;font-weight:400;letter-spacing:0.12em;text-transform:uppercase" style-hover="background:#012027;color:#F6F0E9">Lunsjbong til møtet</button>
+    </div>
+  </section>
+
+  <section style="max-width:1400px;margin:0 auto;padding:24px 32px 100px">
+    <div style="border-bottom:1px solid #0F2B2E;padding-bottom:18px;margin-bottom:36px">
+      <h2 style="font-family:'Gloock',serif;font-weight:400;font-size:clamp(26px,3vw,40px);margin:0 0 10px">Våre kaffebarer</h2>
+      <p style="margin:0;max-width:60ch;font-size:15px;line-height:1.75;opacity:0.85">Små pauser, god kaffe og påfyll gjennom dagen. Her finner du kaffe, småretter og noe søtt når arbeidsdagen trenger litt ekstra påfyll.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:40px">
+      <sc-for list="{{ cafes }}" as="c" hint-placeholder-count="2">
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <div style="position:relative;width:100%;aspect-ratio:3/2;overflow:hidden">
+            <image-slot id="{{ c.slot }}" src="{{ c.src }}" shape="rect" placeholder="Bilde"></image-slot>
+          </div>
+          <div style="font-family:'Gloock',serif;font-size:26px">{{ c.name }}</div>
+          <div style="font-size:14px;line-height:1.7;opacity:0.8;max-width:42ch">{{ c.text }}</div>
+          <div style="font-family:'Gilroy',sans-serif;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;opacity:0.65">{{ c.time }}</div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+</sc-if>
+
+<sc-if value="{{ isMotemat }}" hint-placeholder-val="{{ false }}">
+  <div data-screen-label="Møtemat" style="background:#F6F0E9">
+    <div style="max-width:1400px;margin:0 auto;padding:26px 32px 6px;display:flex;gap:8px;flex-wrap:wrap">
+      <sc-for list="{{ menuTabs }}" as="t" hint-placeholder-count="5">
+        <sc-if value="{{ t.active }}" hint-placeholder-val="{{ false }}">
+          <button onClick="{{ t.go }}" style="cursor:pointer;font-family:'Gilroy',sans-serif;background:#E8412A;border:none;color:#FFFFFF;border-radius:999px;padding:11px 20px;font-size:10px;font-weight:800;letter-spacing:0.07em">{{ t.label }}</button>
+        </sc-if>
+        <sc-if value="{{ t.idle }}" hint-placeholder-val="{{ true }}">
+          <button onClick="{{ t.go }}" style="cursor:pointer;font-family:'Gilroy',sans-serif;background:transparent;border:1px solid #E8412A;color:#E8412A;border-radius:999px;padding:11px 20px;font-size:10px;font-weight:800;letter-spacing:0.07em" style-hover="background:#E8412A;color:#FFFFFF">{{ t.label }}</button>
+        </sc-if>
+      </sc-for>
+    </div>
+  </div>
+
+  <section style="background:#F6F0E9">
+    <div style="max-width:1400px;margin:0 auto;padding:52px 32px 40px;display:flex;gap:56px;flex-wrap:wrap;align-items:flex-start">
+      <div style="flex:1 1 380px;min-width:0">
+        <h1 style="font-family:'Rayton Brink','Gilroy',sans-serif;font-weight:400;font-size:clamp(40px,5.4vw,72px);line-height:0.98;margin:0 0 20px;color:#E8412A">Smaken av en god pause</h1>
+        <p style="font-size:19px;line-height:1.45;margin:0 0 22px;max-width:30ch">Fleksibel servering til møter og arrangementer</p>
+        <div style="width:68px;height:2px;background:#E8412A;margin:0 0 24px"></div>
+        <p style="margin:0 0 16px;font-size:15px;line-height:1.75;max-width:52ch">Serveringen kan tilpasses alt fra korte møter og kaffepauser til heldagssamlinger, workshops og arrangementer på huset.</p>
+        <p style="margin:0 0 16px;font-size:15px;line-height:1.75;max-width:52ch">Velg mellom ferdige møtepakker eller sett sammen serveringen etter behov. Wellmade tilbyr et bredt utvalg av pausemat, påsmurt, salater, wraps, snacks, kaker og drikke.</p>
+        <p style="margin:0 0 22px;font-size:15px;line-height:1.75;max-width:52ch">For full meny, priser, allergener og bestilling, ta kontakt med møtevert.</p>
+        <div style="font-family:'Gilroy',sans-serif;font-size:13px;font-weight:700;margin-bottom:4px">Møtevert</div>
+        <a href="mailto:cc.motesenter@motekompaniet.no" style="font-size:15px;display:block">cc.motesenter@motekompaniet.no</a>
+        <div style="font-size:15px;margin-top:2px">47 70 21 33</div>
+      </div>
+      <div style="flex:1 1 400px;min-width:0;display:grid;grid-template-columns:1fr 1fr;gap:14px">
+        <div style="position:relative;width:100%;aspect-ratio:1/1;overflow:hidden"><image-slot id="wm-intro-a" src="assets/mat/Kyllingsalat.jpg" shape="rect" placeholder="Rett"></image-slot></div>
+        <div style="position:relative;width:100%;aspect-ratio:1/1;overflow:hidden"><image-slot id="wm-intro-b" src="assets/mat/Smoothie_01.jpg" shape="rect" placeholder="Drikke"></image-slot></div>
+        <div style="position:relative;width:100%;aspect-ratio:1/1;overflow:hidden"><image-slot id="wm-intro-c" src="assets/mat/SproGronnsaker.jpg" shape="rect" placeholder="Pausemat"></image-slot></div>
+        <div style="position:relative;width:100%;aspect-ratio:1/1;overflow:hidden"><image-slot id="wm-intro-d" src="assets/mat/LandbrorundstykkeOstSkinke.jpg" shape="rect" placeholder="Påsmurt"></image-slot></div>
+      </div>
+    </div>
+    <div style="max-width:1400px;margin:0 auto;padding:24px 32px 100px">
+      <div style="display:flex;align-items:baseline;justify-content:space-between;gap:24px;flex-wrap:wrap;margin:0 0 34px">
+        <h2 style="font-family:'Rayton Brink','Gilroy',sans-serif;font-weight:400;font-size:clamp(28px,3.4vw,46px);margin:0;color:#E8412A">{{ menuTitle }}</h2>
+        <div style="font-family:'Gilroy',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;opacity:0.6">{{ itemCount }} · priser eks. mva</div>
+      </div>
+
+      <sc-if value="{{ showPackages }}" hint-placeholder-val="{{ true }}">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:40px">
+          <sc-for list="{{ packages }}" as="p" hint-placeholder-count="4">
+            <div style="display:flex;flex-direction:column;gap:14px">
+              <div style="position:relative;width:100%;aspect-ratio:4/5;overflow:hidden">
+                <image-slot id="{{ p.slot }}" src="{{ p.src }}" shape="rect" placeholder="{{ p.name }}"></image-slot>
+              </div>
+              <div style="font-family:'Rayton Brink','Gilroy',sans-serif;font-weight:400;font-size:30px;line-height:1.1;margin-top:4px">{{ p.name }}</div>
+              <div style="font-family:'Gilroy',sans-serif;font-size:16px;font-weight:700;color:#E8412A">{{ p.price }}</div>
+              <div style="font-size:14.5px;line-height:1.7">{{ p.lead }}</div>
+              <div style="font-size:13.5px;line-height:1.7;opacity:0.78">{{ p.text }}</div>
+              <div style="margin-top:4px">
+                <sc-if value="{{ p.notInCart }}" hint-placeholder-val="{{ true }}">
+                  <button onClick="{{ p.add }}" style="cursor:pointer;font-family:'Gilroy',sans-serif;background:transparent;border:1px solid #E8412A;color:#E8412A;border-radius:999px;padding:11px 22px;font-size:10px;font-weight:800;letter-spacing:0.07em" style-hover="background:#E8412A;color:#FFFFFF">LEGG TIL</button>
+                </sc-if>
+                <sc-if value="{{ p.inCart }}" hint-placeholder-val="{{ false }}">
+                  <div style="display:flex;align-items:center;gap:10px">
+                    <button onClick="{{ p.sub }}" style="cursor:pointer;font-family:'Gilroy',sans-serif;background:transparent;border:1px solid #E8412A;color:#E8412A;border-radius:999px;width:34px;height:34px;font-size:16px;font-weight:800;line-height:1">−</button>
+                    <span style="font-family:'Gilroy',sans-serif;font-size:15px;font-weight:800;min-width:18px;text-align:center;color:#E8412A">{{ p.qty }}</span>
+                    <button onClick="{{ p.add }}" style="cursor:pointer;font-family:'Gilroy',sans-serif;background:#E8412A;border:1px solid #E8412A;color:#FFFFFF;border-radius:999px;width:34px;height:34px;font-size:16px;font-weight:800;line-height:1">+</button>
+                  </div>
+                </sc-if>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ showItems }}" hint-placeholder-val="{{ false }}">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:52px 36px">
+          <sc-for list="{{ items }}" as="it" hint-placeholder-count="6">
+            <div style="display:flex;flex-direction:column;gap:12px">
+              <div style="position:relative;width:100%;aspect-ratio:4/5;overflow:hidden">
+                <image-slot id="{{ it.slot }}" src="{{ it.src }}" shape="rect" placeholder="{{ it.name }}"></image-slot>
+              </div>
+              <div style="font-family:'Rayton Brink','Gilroy',sans-serif;font-weight:400;font-size:26px;line-height:1.1;margin-top:4px">{{ it.name }}</div>
+              <div style="font-family:'Gilroy',sans-serif;font-size:16px;font-weight:700;color:#E8412A">{{ it.price }}</div>
+              <div style="font-size:13.5px;line-height:1.7;opacity:0.78">{{ it.text }}</div>
+              <sc-if value="{{ it.hasAllergens }}" hint-placeholder-val="{{ false }}">
+                <div style="display:flex;gap:5px;flex-wrap:wrap">
+                  <sc-for list="{{ it.allergenList }}" as="a" hint-placeholder-count="2">
+                    <span style="border:1px solid rgba(15,43,46,0.25);border-radius:999px;padding:4px 10px;font-size:10.5px;opacity:0.72">{{ a.text }}</span>
+                  </sc-for>
+                </div>
+              </sc-if>
+              <sc-if value="{{ it.hasNote }}" hint-placeholder-val="{{ false }}">
+                <div style="font-size:11.5px;line-height:1.6;opacity:0.6">{{ it.note }}</div>
+              </sc-if>
+              <div style="margin-top:2px">
+                <sc-if value="{{ it.notInCart }}" hint-placeholder-val="{{ true }}">
+                  <button onClick="{{ it.add }}" style="cursor:pointer;font-family:'Gilroy',sans-serif;background:transparent;border:1px solid #E8412A;color:#E8412A;border-radius:999px;padding:11px 22px;font-size:10px;font-weight:800;letter-spacing:0.07em" style-hover="background:#E8412A;color:#FFFFFF">LEGG TIL</button>
+                </sc-if>
+                <sc-if value="{{ it.inCart }}" hint-placeholder-val="{{ false }}">
+                  <div style="display:flex;align-items:center;gap:10px">
+                    <button onClick="{{ it.sub }}" style="cursor:pointer;font-family:'Gilroy',sans-serif;background:transparent;border:1px solid #E8412A;color:#E8412A;border-radius:999px;width:34px;height:34px;font-size:16px;font-weight:800;line-height:1">−</button>
+                    <span style="font-family:'Gilroy',sans-serif;font-size:15px;font-weight:800;min-width:18px;text-align:center;color:#E8412A">{{ it.qty }}</span>
+                    <button onClick="{{ it.add }}" style="cursor:pointer;font-family:'Gilroy',sans-serif;background:#E8412A;border:1px solid #E8412A;color:#FFFFFF;border-radius:999px;width:34px;height:34px;font-size:16px;font-weight:800;line-height:1">+</button>
+                  </div>
+                </sc-if>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+        <p style="margin:28px 0 0;font-size:13px;opacity:0.7">Alle priser er eks. mva. For full meny, priser, allergener og bestilling, ta kontakt med møtevert.</p>
+      </sc-if>
+    </div>
+
+    <sc-if value="{{ hasPicked }}" hint-placeholder-val="{{ false }}">
+      <div style="position:sticky;bottom:0;z-index:20;background:#E8412A;color:#F6F0E9">
+        <div style="max-width:1400px;margin:0 auto;padding:18px 32px;display:flex;align-items:center;gap:20px;flex-wrap:wrap">
+          <div style="display:flex;flex-direction:column;gap:2px;margin-right:auto">
+            <span style="font-family:'Gilroy',sans-serif;font-size:11px;font-weight:800;letter-spacing:0.12em;text-transform:uppercase">{{ pickedCount }}</span>
+            <span style="font-family:'Rayton Brink','Gilroy',sans-serif;font-weight:400;font-size:26px;line-height:1.1">{{ pickedSum }}</span>
+          </div>
+          <button onClick="{{ clearPicked }}" style="cursor:pointer;font-family:'Gilroy',sans-serif;background:transparent;border:1px solid rgba(246,240,233,0.6);color:#F6F0E9;border-radius:999px;padding:12px 22px;font-size:10px;font-weight:800;letter-spacing:0.07em" style-hover="border-color:#F6F0E9">TØM LISTEN</button>
+          <a href="{{ pickedMailto }}" style="font-family:'Gilroy',sans-serif;background:#F6F0E9;color:#E8412A;border-radius:999px;padding:14px 28px;font-size:10px;font-weight:800;letter-spacing:0.07em;text-decoration:none" style-hover="background:#FFFFFF">SEND FORESPØRSEL PÅ E-POST</a>
+        </div>
+      </div>
+    </sc-if>
+  </section>
+</sc-if>
+
+<sc-if value="{{ isBooking }}" hint-placeholder-val="{{ false }}">
+  <section data-screen-label="Booking" style="background:#FFFFFF">
+    <div style="max-width:1400px;margin:0 auto;padding:56px 32px 0">
+      <div style="font-family:'Gilroy',sans-serif;font-size:11px;font-weight:800;letter-spacing:0.2em;text-transform:uppercase;opacity:0.6;margin-bottom:22px">Kontakt &amp; booking</div>
+      <h1 style="font-family:'Gloock',serif;font-weight:400;font-size:clamp(36px,4.8vw,64px);line-height:1.06;margin:0 0 20px;max-width:18ch">Tre veier inn, ett sted å svare</h1>
+      <p style="font-size:16.5px;line-height:1.7;max-width:56ch;margin:0 0 20px">Enten du planlegger et møte, en middag eller et arrangement, eller ønsker mer informasjon om kontorplass, hjelper vi deg gjerne videre.</p>
+      <div style="width:68px;height:1px;background:#0F2B2E"></div>
+    </div>
+  </section>
+
+  <section style="background:#FFFFFF">
+    <div style="max-width:1400px;margin:0 auto;padding:56px 32px 100px;display:flex;gap:64px;flex-wrap:wrap;align-items:flex-start">
+      <div style="flex:1 1 440px;min-width:0">
+        <h2 style="font-family:'Gilroy',sans-serif;font-weight:700;font-size:clamp(22px,2.4vw,28px);letter-spacing:-0.01em;margin:0 0 24px">Send forespørsel</h2>
+
+        <div style="border-left:2px solid #E8412A;padding:2px 0 2px 18px;margin-bottom:28px">
+          <div style="font-size:14px;line-height:1.7;max-width:52ch">Skal det serveres mat? Skriv ønsket møtemat i meldingsfeltet, så setter møteverten det sammen. Menyen med priser og allergener finner du under Møtemat.</div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:22px">
+          <label style="display:flex;flex-direction:column;gap:7px;font-family:'Gilroy',sans-serif;font-size:9.5px;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;opacity:0.7">Navn
+            <input value="{{ fNavn }}" onChange="{{ setNavn }}" placeholder="Ola Nordmann" style="font-family:'Gilroy',sans-serif;font-weight:300;border:none;border-bottom:1px solid rgba(15,43,46,0.3);background:transparent;padding:11px 2px;font-size:15px;color:#0F2B2E;letter-spacing:normal;text-transform:none" />
+          </label>
+          <label style="display:flex;flex-direction:column;gap:7px;font-family:'Gilroy',sans-serif;font-size:9.5px;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;opacity:0.7">E-post
+            <input value="{{ fEpost }}" onChange="{{ setEpost }}" placeholder="ola@selskap.no" style="font-family:'Gilroy',sans-serif;font-weight:300;border:none;border-bottom:1px solid rgba(15,43,46,0.3);background:transparent;padding:11px 2px;font-size:15px;color:#0F2B2E;letter-spacing:normal;text-transform:none" />
+          </label>
+          <label style="display:flex;flex-direction:column;gap:7px;font-family:'Gilroy',sans-serif;font-size:9.5px;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;opacity:0.7">Selskap
+            <input value="{{ fSelskap }}" onChange="{{ setSelskap }}" placeholder="Selskap AS" style="font-family:'Gilroy',sans-serif;font-weight:300;border:none;border-bottom:1px solid rgba(15,43,46,0.3);background:transparent;padding:11px 2px;font-size:15px;color:#0F2B2E;letter-spacing:normal;text-transform:none" />
+          </label>
+          <label style="display:flex;flex-direction:column;gap:7px;font-family:'Gilroy',sans-serif;font-size:9.5px;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;opacity:0.7">Hva gjelder det
+            <select value="{{ fType }}" onChange="{{ setType }}" style="font-family:'Gilroy',sans-serif;font-weight:300;border:none;border-bottom:1px solid rgba(15,43,46,0.3);background:transparent;padding:11px 2px;font-size:15px;color:#0F2B2E;letter-spacing:normal;text-transform:none">
+              <sc-for list="{{ typer }}" as="t" hint-placeholder-count="4">
+                <option value="{{ t.value }}">{{ t.value }}</option>
+              </sc-for>
+            </select>
+          </label>
+          <label style="display:flex;flex-direction:column;gap:7px;font-family:'Gilroy',sans-serif;font-size:9.5px;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;opacity:0.7">Dato
+            <input type="date" value="{{ fDato }}" onChange="{{ setDato }}" style="font-family:'Gilroy',sans-serif;font-weight:300;border:none;border-bottom:1px solid rgba(15,43,46,0.3);background:transparent;padding:11px 2px;font-size:15px;color:#0F2B2E;letter-spacing:normal;text-transform:none" />
+          </label>
+          <label style="display:flex;flex-direction:column;gap:7px;font-family:'Gilroy',sans-serif;font-size:9.5px;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;opacity:0.7">Antall gjester
+            <input value="{{ fAntall }}" onChange="{{ setAntall }}" placeholder="12" style="font-family:'Gilroy',sans-serif;font-weight:300;border:none;border-bottom:1px solid rgba(15,43,46,0.3);background:transparent;padding:11px 2px;font-size:15px;color:#0F2B2E;letter-spacing:normal;text-transform:none" />
+          </label>
+        </div>
+        <label style="display:flex;flex-direction:column;gap:7px;font-family:'Gilroy',sans-serif;font-size:9.5px;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;opacity:0.7;margin-top:24px">Melding
+          <textarea value="{{ fMelding }}" onChange="{{ setMelding }}" rows="4" placeholder="Fortell kort hva dere planlegger." style="font-family:'Gilroy',sans-serif;font-weight:300;border:1px solid rgba(15,43,46,0.25);background:transparent;padding:14px;font-size:15px;color:#0F2B2E;letter-spacing:normal;text-transform:none;resize:vertical"></textarea>
+        </label>
+
+        <div style="display:flex;gap:16px;flex-wrap:wrap;align-items:center;margin-top:28px">
+          <button onClick="{{ submit }}" style="cursor:pointer;font-family:'Gilroy',sans-serif;background:#012027;border:1px solid #012027;color:#F6F0E9;border-radius:999px;padding:16px 30px;font-size:10px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase" style-hover="background:#0F2B2E;border:1px solid #0F2B2E">Send forespørsel</button>
+          <div style="font-size:12.5px;opacity:0.7;max-width:34ch">Knappen åpner en ferdig utfylt e-post til riktig mottaker. Ingenting sendes før du trykker Send.</div>
+        </div>
+        <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
+          <div style="margin-top:22px;background:#0F2B2E;color:#F6F0E9;padding:20px 24px;font-size:14px">E-postprogrammet ditt åpnes med forespørselen ferdig utfylt. Trykk Send der, så er den hos oss.</div>
+        </sc-if>
+      </div>
+
+      <div style="flex:1 1 320px;min-width:0">
+        <h2 style="font-family:'Gilroy',sans-serif;font-weight:700;font-size:clamp(22px,2.4vw,28px);letter-spacing:-0.01em;margin:0 0 10px">Kontaktliste</h2>
+        <p style="margin:0 0 28px;font-size:13.5px;opacity:0.75">Alle bookingforespørsler og andre henvendelser sendes til booking@constructioncity.no</p>
+        <div style="display:flex;flex-direction:column;gap:20px">
+          <sc-for list="{{ contacts }}" as="p" hint-placeholder-count="5">
+            <div style="border-top:1px solid rgba(15,43,46,0.22);padding-top:18px">
+              <div style="font-family:'Gilroy',sans-serif;font-size:9.5px;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;opacity:0.6;margin-bottom:10px">{{ p.role }}</div>
+              <div style="font-family:'Gloock',serif;font-size:22px;margin-bottom:6px">{{ p.name }}</div>
+              <a href="{{ p.mailto }}" style="font-size:13.5px;word-break:break-all">{{ p.email }}</a>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+  </section>
+</sc-if>
+
+</main>
+
+
+
+<footer style="background:#0F2B2E;color:#F6F0E9">
+  <div style="max-width:1400px;margin:0 auto;padding:64px 32px 40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:40px">
+    <div>
+      <img src="assets/cc-logo-hvit.png" alt="Construction City" style="height:26px;width:auto;display:block;margin-bottom:22px" />
+      <div style="font-size:14px;line-height:1.8;opacity:0.85">Standardveien 1<br />0614 Oslo</div>
+    </div>
+    <div>
+      <div style="font-family:'Gilroy',sans-serif;font-size:9.5px;letter-spacing:0.18em;text-transform:uppercase;opacity:0.55;margin-bottom:16px">Åpningstider</div>
+      <div style="font-size:14px;line-height:1.9;opacity:0.85">Bygget: man–fre 07.00–17.00<br />Foodcourt: 10.30–13.30<br />Spiren: 07.00–17.00<br />Centralen: 08.00–15.00</div>
+    </div>
+    <div>
+      <div style="font-family:'Gilroy',sans-serif;font-size:9.5px;letter-spacing:0.18em;text-transform:uppercase;opacity:0.55;margin-bottom:16px">Booking</div>
+      <div style="display:flex;flex-direction:column;gap:9px;font-size:14px">
+        <a href="mailto:booking@constructioncity.no" style="color:#F6F0E9">booking@constructioncity.no</a>
+        <a href="mailto:cc.motesenter@motekompaniet.no" style="color:#F6F0E9">cc.motesenter@motekompaniet.no</a>
+        <a href="https://constructioncity.no" target="_blank" rel="noopener" style="color:#F6F0E9">constructioncity.no</a>
+      </div>
+    </div>
+    <div>
+      <div style="font-family:'Gilroy',sans-serif;font-size:9.5px;letter-spacing:0.18em;text-transform:uppercase;opacity:0.55;margin-bottom:16px">Personvern</div>
+      <div style="display:flex;flex-direction:column;gap:9px;font-size:14px">
+        <a href="https://constructioncity.no" target="_blank" rel="noopener" style="color:#F6F0E9">Personvernerklæring</a>
+        <a href="https://constructioncity.no" target="_blank" rel="noopener" style="color:#F6F0E9">Informasjonskapsler</a>
+      </div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:16px">
+        <span style="border:1px solid rgba(246,240,233,0.3);border-radius:999px;padding:5px 11px;font-size:11px;opacity:0.85">Nødvendige</span>
+        <span style="border:1px solid rgba(246,240,233,0.3);border-radius:999px;padding:5px 11px;font-size:11px;opacity:0.85">Funksjonelle</span>
+        <span style="border:1px solid rgba(246,240,233,0.3);border-radius:999px;padding:5px 11px;font-size:11px;opacity:0.85">Markedsføring</span>
+      </div>
+    </div>
+  </div>
+  <div style="border-top:1px solid rgba(246,240,233,0.16)">
+    <div style="max-width:1400px;margin:0 auto;padding:18px 32px;display:flex;gap:16px;flex-wrap:wrap;justify-content:space-between;font-family:'Gilroy',sans-serif;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;opacity:0.6">
+      <span>Destinasjon · Construction City</span>
+      <span>destinasjon.constructioncity.no</span>
+    </div>
+  </div>
+</footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const wrap = (arr) => (arr || []).map((t) => ({ text: t }));
+const kr = (n) => n.toLocaleString('nb-NO') + ',- eks. mva';
+const slug = (t) => 'wm-' + String(t).toLowerCase()
+  .replace(/æ/g, 'ae').replace(/ø/g, 'o').replace(/å/g, 'a')
+  .replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+
+class Component extends DCLogic {
+  state = {
+    route: 'hjem', tabs: {}, menuTab: 'pakker', sent: false, tick: 0, picked: {},
+    form: { navn: '', epost: '', selskap: '', type: 'Lokale eller arrangement', dato: '', antall: '', melding: '' }
+  };
+
+  setF = (k) => (e) => {
+    const v = e.target.value;
+    this.setState((s) => ({ form: Object.assign({}, s.form, { [k]: v }) }));
+  };
+
+  componentDidMount() {
+    if (!window.DCDATA) {
+      this._t = setInterval(() => {
+        if (window.DCDATA) { clearInterval(this._t); this.setState((s) => ({ tick: s.tick + 1 })); }
+      }, 60);
+    }
+  }
+
+  componentWillUnmount() { if (this._t) clearInterval(this._t); }
+
+  go = (route, tab) => {
+    this.setState((s) => ({
+      route,
+      tabs: tab ? Object.assign({}, s.tabs, { [route]: tab }) : s.tabs,
+      sent: false
+    }));
+    if (typeof window !== 'undefined') window.scrollTo(0, 0);
+  };
+
+  renderVals() {
+    const D = (typeof window !== 'undefined' && window.DCDATA) || null;
+    const route = this.state.route;
+    const sec = D && D.SECTIONS[route];
+    const tabId = sec ? (this.state.tabs[route] || sec.tabs[0].id) : null;
+    const c = sec ? sec.content[tabId] : null;
+    const menuTab = this.state.menuTab;
+
+    // Toppbildet skal aldri gjenta seg i bildestabelen under
+    const heroKey = route + '-' + tabId;
+    const hero = (D && D.HERO_TAB && D.HERO_TAB[heroKey]) || (D && D.HERO[route]) || '';
+    const raw = (D && D.IMG[route + '-' + tabId]) || [];
+    const secPics = [];
+    for (const p of raw) { if (p !== hero && secPics.indexOf(p) === -1) secPics.push(p); }
+    if (D && secPics.length < 3) {
+      const pool = Object.keys(D.IMG).reduce((a, k) => a.concat(D.IMG[k]), []);
+      for (const p of pool) {
+        if (secPics.length >= 3) break;
+        if (p !== hero && secPics.indexOf(p) === -1) secPics.push(p);
+      }
+    }
+    const mt = D ? D.MENU_TABS.find((t) => t.id === menuTab) : null;
+
+    return {
+      goHome: () => this.go('hjem'),
+      goServering: () => this.go('servering'),
+      goBooking: () => this.go('booking'),
+      goMotemat: () => this.go('motemat'),
+
+      isHome: route === 'hjem',
+      notHome: route !== 'hjem',
+      notMotemat: route !== 'motemat',
+      showSpacer: route !== 'hjem' && route !== 'motemat',
+      isSection: !!sec,
+      isHoyden: route === 'hoyden',
+      isFoodcourt: route === 'foodcourt',
+      isMotemat: route === 'motemat',
+      isBooking: route === 'booking',
+
+      navItems: [{ route: 'hjem', label: 'Hjem' }].concat(D ? D.NAV : []).map((n) => ({
+        label: n.label,
+        active: route === n.route,
+        idle: route !== n.route,
+        go: () => this.go(n.route)
+      })),
+
+      tiles: (D ? D.TILES : []).map((t, i) => ({
+        num: String(i + 1).padStart(2, '0'),
+        slot: t.slot,
+        src: t.src || '',
+        kicker: t.kicker,
+        title: t.title,
+        lead: t.lead,
+        tags: wrap(t.tags),
+        go: () => this.go(t.route)
+      })),
+
+      hours: D ? D.HOURS : [],
+
+      secKicker: sec ? sec.kicker : '',
+      secTabs: sec
+        ? sec.tabs.map((t) => ({
+            label: t.label,
+            active: t.id === tabId,
+            idle: t.id !== tabId,
+            go: () => this.go(route, t.id)
+          }))
+        : [],
+      secTitle: c ? c.title : '',
+      secLead: c ? c.lead : '',
+      secParas: c ? wrap(c.paras) : [],
+      secHasSuitable: !!(c && c.suitable),
+      secSuitable: c ? wrap(c.suitable) : [],
+      secBook: c && c.book ? [c.book] : [],
+      secLink: c && c.link ? [c.link] : [],
+      secAsk: c && c.ask ? [{ label: c.ask, go: () => this.go('booking') }] : c && c.goto ? [{ label: c.goto.label, go: () => this.go(c.goto.route) }] : [],
+      secHasSticker: !!(c && c.sticker),
+      secSticker: c ? c.sticker : '',
+      secStickerGo: () => {
+        if (c && c.stickerHref) { window.open(c.stickerHref, '_blank', 'noopener'); return; }
+        this.go(c && c.stickerRoute ? c.stickerRoute : 'booking');
+      },
+      secHasInfo: !!(c && c.info),
+      secImgA: route + '-' + tabId + '-a',
+      secImgB: route + '-' + tabId + '-b',
+      secImgC: route + '-' + tabId + '-c',
+      secSrcA: secPics[0] || '',
+      secSrcB: secPics[1] || '',
+      secSrcC: secPics[2] || '',
+      secHasCaption: !!(D && D.CAPTION[route + '-' + tabId]),
+      secCaption: D && D.CAPTION[route + '-' + tabId] ? D.CAPTION[route + '-' + tabId] : '',
+      heroSrc: hero,
+      heroSlot: 'hero-' + (D && D.HERO_TAB && D.HERO_TAB[heroKey] ? heroKey : route),
+
+      hoydenSal: (function () {
+        if (!D) return '';
+        const brukt = [D.HERO.hoyden].concat(D.HOYDEN_CARDS.map((x) => x.src));
+        const kand = ['assets/foto/eik-2.jpg', 'assets/foto/glasshallen.jpg', 'assets/foto/dsc03685.png', 'assets/foto/pic-3.jpg'];
+        return kand.find((p) => brukt.indexOf(p) === -1) || '';
+      })(),
+      hoydenCards: (D ? D.HOYDEN_CARDS : []).map((x) => ({
+        slot: x.slot,
+        src: x.src || '',
+        title: x.title,
+        text: x.text,
+        cta: x.cta,
+        go: () => this.go(x.route, x.tab)
+      })),
+      concepts: D ? D.CONCEPTS : [],
+      cafes: D ? D.CAFES : [],
+
+      menuTabs: (D ? D.MENU_TABS : []).map((t) => ({
+        label: t.label,
+        active: t.id === menuTab,
+        idle: t.id !== menuTab,
+        go: () => this.setState({ menuTab: t.id })
+      })),
+      showVicinoLogo: route === 'servering' && tabId === 'vicino',
+      ...this.hoydenMeny(),
+      menuTitle: mt ? mt.title : '',
+      showPackages: menuTab === 'pakker',
+      showItems: menuTab !== 'pakker',
+      packages: (D ? D.PACKAGES : []).map((p) => ({
+        name: p.name,
+        price: kr(p.price),
+        lead: p.lead,
+        text: p.text,
+        slot: slug(p.name),
+        src: (D && D.DISH_IMG && D.DISH_IMG[p.name]) || '',
+        ...this.pickProps(p)
+      })),
+      items: (D && D.ITEMS[menuTab] ? D.ITEMS[menuTab] : []).map((it) => ({
+        name: it.name,
+        text: it.text,
+        hasAllergens: !!it.allergens,
+        allergens: it.allergens || '',
+        price: kr(it.price),
+        slot: slug(it.name),
+        src: (D && D.DISH_IMG && D.DISH_IMG[it.name]) || '',
+        ...this.pickProps(it)
+      })),
+      ...this.basket(),
+      itemCount: (D && D.ITEMS[menuTab] ? D.ITEMS[menuTab].length : (D ? D.PACKAGES.length : 0)) + (menuTab === 'pakker' ? ' pakker' : ' retter'),
+
+      contacts: (D ? D.CONTACTS : []).map((p) => ({
+        role: p.role,
+        name: p.name,
+        email: p.email,
+        mailto: 'mailto:' + p.email
+      })),
+      typer: (D ? D.TYPER : []).map((v) => ({ value: v })),
+      fNavn: this.state.form.navn,
+      setNavn: this.setF('navn'),
+      fEpost: this.state.form.epost,
+      setEpost: this.setF('epost'),
+      fSelskap: this.state.form.selskap,
+      setSelskap: this.setF('selskap'),
+      fType: this.state.form.type,
+      setType: this.setF('type'),
+      fDato: this.state.form.dato,
+      setDato: this.setF('dato'),
+      fAntall: this.state.form.antall,
+      setAntall: this.setF('antall'),
+      fMelding: this.state.form.melding,
+      setMelding: this.setF('melding'),
+      sent: this.state.sent,
+      submit: () => {
+        const f = this.state.form;
+        const to = f.type === 'Møtemat' ? 'cc.motesenter@motekompaniet.no'
+          : f.type === 'Selskap på Høyden' ? 'hoyden@compass-group.no'
+          : 'booking@constructioncity.no';
+        const body = 'Hei!\n\n' + (f.melding || '') +
+          '\n\nType: ' + f.type +
+          '\nDato: ' + (f.dato || '') +
+          '\nAntall: ' + (f.antall || '') +
+          '\n\nNavn: ' + (f.navn || '') +
+          '\nSelskap: ' + (f.selskap || '') +
+          '\nE-post: ' + (f.epost || '') + '\n';
+        window.location.href = 'mailto:' + to + '?subject=' +
+          encodeURIComponent('Forespørsel – ' + f.type) + '&body=' + encodeURIComponent(body);
+        this.setState({ sent: true });
+      }
+    };
+  }
+
+  hoydenMeny() {
+    const D = window.DCDATA;
+    const list = (D && D.HOYDEN_MENYER) || [];
+    const active = this.state.menyId || (list[0] && list[0].id);
+    const cur = list.find((m) => m.id === active) || list[0] || {};
+    const lenke = (D && D.HOYDEN_MENY_LENKE) || '';
+    return {
+      menyTabs: list.map((m) => ({
+        label: m.label,
+        active: m.id === active,
+        idle: m.id !== active,
+        go: () => this.setState({ menyId: m.id })
+      })),
+      menySrc: cur.src || '',
+      menyTittel: cur.title || '',
+      menyNote: cur.note || '',
+      menyHarLenke: !!lenke,
+      menyLenke: lenke,
+      menyZoomPa: () => this.setState({ menyZoom: true }),
+      menyZoomAv: () => this.setState({ menyZoom: false }),
+      menyZoomer: !!this.state.menyZoom,
+      stopp: (e) => { if (e && e.stopPropagation) e.stopPropagation(); }
+    };
+  }
+
+  bump(name, n) {
+    this.setState((s) => {
+      const p = Object.assign({}, s.picked);
+      const v = (p[name] || 0) + n;
+      if (v <= 0) delete p[name]; else p[name] = v;
+      return { picked: p };
+    });
+  }
+
+  pickProps(o) {
+    const q = this.state.picked[o.name] || 0;
+    return {
+      inCart: q > 0,
+      notInCart: q === 0,
+      qty: String(q),
+      add: () => this.bump(o.name, 1),
+      sub: () => this.bump(o.name, -1)
+    };
+  }
+
+  basket() {
+    const D = window.DCDATA;
+    const prices = {};
+    if (D) {
+      (D.PACKAGES || []).forEach((p) => { prices[p.name] = p.price; });
+      Object.keys(D.ITEMS || {}).forEach((k) => D.ITEMS[k].forEach((it) => { prices[it.name] = it.price; }));
+    }
+    const names = Object.keys(this.state.picked);
+    let count = 0, sum = 0;
+    const lines = names.map((n) => {
+      const q = this.state.picked[n];
+      count += q;
+      sum += q * (prices[n] || 0);
+      return q + ' × ' + n + ' (' + (prices[n] || 0) + ',- eks. mva)';
+    });
+    const body = 'Hei!\n\nVi ønsker å bestille møtemat:\n\n' + lines.join('\n') +
+      '\n\nSum: ' + sum + ',- eks. mva\n\nDato:\nKlokkeslett:\nAntall personer:\nMøterom:\n\nVennlig hilsen\n';
+    return {
+      hasPicked: count > 0,
+      pickedCount: count + (count === 1 ? ' vare valgt' : ' varer valgt'),
+      pickedSum: sum.toLocaleString('nb-NO') + ',- eks. mva',
+      pickedMailto: 'mailto:cc.motesenter@motekompaniet.no?subject=' +
+        encodeURIComponent('Forespørsel møtemat – Wellmade') + '&body=' + encodeURIComponent(body),
+      clearPicked: () => this.setState({ picked: {} })
+    };
+  }
+}
+
+</script>
+</body>
+</html>

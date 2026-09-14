@@ -1,0 +1,42 @@
+# Filnavn for Wellmade-bilder
+
+Legg bildene i `bilder/` i Destinasjon_CC-repoet med disse navnene (.jpg, .png eller .webp går fint):
+
+- foodcourt  →  Foodcourt
+- hoyden-restaurant  →  Høyden Restaurant
+- trattoria-vicino  →  Trattoria Vicino
+- frokostpakke  →  Frokostpakke
+- halvdagspakke-alternativ-1  →  Halvdagspakke – alternativ 1
+- halvdagspakke-alternativ-2  →  Halvdagspakke – alternativ 2
+- heldagspakke  →  Heldagspakke
+- frukt  →  Frukt
+- smoothie  →  Smoothie
+- gresk-yoghurt  →  Gresk yoghurt
+- nylaget-byggrynsgrot  →  Nylaget byggrynsgrøt
+- spro-croissant  →  Sprø croissant
+- husets-rundstykke-med-ost-skinke  →  Husets rundstykke med ost & skinke
+- husets-rundstykke-med-kremost  →  Husets rundstykke med kremost
+- gresk-salat  →  Gresk salat
+- kyllingsalat-med-parmesan  →  Kyllingsalat med parmesan
+- kyllingwrap  →  Kyllingwrap
+- vegetarwrap  →  Vegetarwrap
+- focaccia-med-fetaost  →  Focaccia med fetaost
+- focaccia-med-spekeskinke  →  Focaccia med spekeskinke
+- frisk-frukt  →  Frisk frukt
+- fruktboks  →  Fruktboks
+- husets-kanelknute  →  Husets kanelknute
+- vanilje-og-bringebaerbolle  →  Vanilje- og bringebærbolle
+- husets-sjokolade-og-peanottcookie  →  Husets sjokolade- og peanøttcookie
+- flapjack-med-rosiner  →  Flapjack med rosiner
+- gulrotkake  →  Gulrotkake
+- brownie-med-cashewnotter  →  Brownie med cashewnøtter
+- spicy-mandler  →  Spicy mandler
+- nystekte-vafler  →  Nystekte vafler
+- drikkepakke  →  Drikkepakke
+- kaffe  →  Kaffe
+- te  →  Te
+- juice  →  Juice
+- limonade  →  Limonade
+- telemark-mineralvann  →  Telemark mineralvann
+- mineralvann  →  Mineralvann
+- wellmade-smoothie  →  Wellmade smoothie
