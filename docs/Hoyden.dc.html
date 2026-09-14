@@ -30,7 +30,7 @@
   <img src="assets/cc/hoyden-sal.jpg" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" />
   <div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(18,18,18,0.72) 0%,rgba(18,18,18,0.42) 38%,rgba(18,18,18,0.68) 100%);pointer-events:none"></div>
   <div style="position:absolute;left:0;right:0;top:0;z-index:2;max-width:1400px;margin:0 auto;padding:26px 32px 20px;display:flex;align-items:flex-start;gap:24px">
-    <div style="flex:0 0 auto;font-family:'Gilroy',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;line-height:1.5;padding-top:6px">Construction City<br />10. etasje</div>
+    <div style="flex:0 0 auto;font-family:'Gilroy',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;line-height:1.5;padding-top:6px">Høyden Restaurant<br />Construction City · 10. etasje</div>
     <div style="flex:1 1 auto"></div>
     <a href="mailto:hoyden@compass-group.no" style="flex:0 0 auto;width:86px;height:86px;border-radius:50%;background:#F5B41A;color:#121212;text-decoration:none;display:flex;align-items:center;justify-content:center;text-align:center;font-family:'Gilroy',sans-serif;font-size:9px;font-weight:700;letter-spacing:0.09em;text-transform:uppercase;line-height:1.6" style-hover="background:#F6F0E9">Kontakt &amp; booking</a>
   </div>
@@ -40,20 +40,20 @@
   </div>
 </header>
 
-<div style="background:#F6F0E9">
-  <div style="max-width:1400px;margin:0 auto;padding:26px 32px 6px;display:flex;gap:8px;flex-wrap:wrap">
-    <sc-for list="{{ sider }}" as="s" hint-placeholder-count="2">
-      <sc-if value="{{ s.active }}" hint-placeholder-val="{{ false }}">
-        <button onClick="{{ s.go }}" style="cursor:pointer;font-family:'Gilroy',sans-serif;background:#121212;border:1px solid #121212;color:#F6F0E9;border-radius:999px;padding:12px 26px;font-size:10.5px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase">{{ s.label }}</button>
+<div style="position:sticky;top:0;z-index:15;background:#F6F0E9">
+  <div style="max-width:1400px;margin:0 auto;padding:14px 32px;display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+    <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="4">
+      <sc-if value="{{ t.active }}" hint-placeholder-val="{{ false }}">
+        <button onClick="{{ t.go }}" style="cursor:pointer;font-family:'Gilroy',sans-serif;background:#121212;border:1px solid #121212;color:#F6F0E9;border-radius:999px;padding:12px 24px;font-size:10.5px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase">{{ t.label }}</button>
       </sc-if>
-      <sc-if value="{{ s.idle }}" hint-placeholder-val="{{ true }}">
-        <button onClick="{{ s.go }}" style="cursor:pointer;font-family:'Gilroy',sans-serif;background:transparent;border:1px solid #121212;color:#121212;border-radius:999px;padding:12px 26px;font-size:10.5px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase" style-hover="background:#F5B41A;border-color:#F5B41A;color:#121212">{{ s.label }}</button>
+      <sc-if value="{{ t.idle }}" hint-placeholder-val="{{ true }}">
+        <button onClick="{{ t.go }}" style="cursor:pointer;font-family:'Gilroy',sans-serif;background:transparent;border:1px solid #121212;color:#121212;border-radius:999px;padding:12px 24px;font-size:10.5px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase" style-hover="background:#F5B41A;border-color:#F5B41A;color:#121212">{{ t.label }}</button>
       </sc-if>
     </sc-for>
   </div>
 </div>
 
-<sc-if value="{{ visRestaurant }}" hint-placeholder-val="{{ false }}">
+<sc-if value="{{ visInfo }}" hint-placeholder-val="{{ true }}">
   <section style="background:#F6F0E9">
     <div style="max-width:1400px;margin:0 auto;padding:52px 32px 24px;display:flex;gap:64px;flex-wrap:wrap;align-items:flex-start">
       <div style="flex:1 1 400px;min-width:0">
@@ -64,7 +64,7 @@
         <p style="font-size:14.5px;font-weight:300;line-height:1.85;max-width:48ch;margin:0 0 16px">Høyden passer for middager, kundearrangementer, selskaper og anledninger som fortjener litt ekstra. Opplevelsen kan også kombineres med privat lounge, styrerom eller takterrasse etter behov.</p>
         <p style="font-size:14.5px;font-weight:300;line-height:1.85;max-width:48ch;margin:0 0 28px">Med direkte tilgang til takterrassen kan arrangementet fortsette ute når været tillater det – med byen som bakteppe.</p>
         <div style="display:flex;gap:12px;flex-wrap:wrap">
-          <button onClick="{{ tilMeny }}" style="cursor:pointer;font-family:'Gilroy',sans-serif;background:#121212;border:1px solid #121212;color:#F6F0E9;border-radius:999px;padding:16px 30px;font-size:10.5px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase" style-hover="background:#F5B41A;border-color:#F5B41A;color:#121212">Se selskapsmenyene</button>
+          <button onClick="{{ tilMeny }}" style="cursor:pointer;font-family:'Gilroy',sans-serif;background:#121212;border:1px solid #121212;color:#F6F0E9;border-radius:999px;padding:16px 30px;font-size:10.5px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase" style-hover="background:#F5B41A;border-color:#F5B41A;color:#121212">Se menyene</button>
           <a href="mailto:hoyden@compass-group.no" style="font-family:'Gilroy',sans-serif;background:transparent;border:1px solid #121212;color:#121212;border-radius:999px;padding:16px 30px;font-size:10.5px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;text-decoration:none" style-hover="background:#F5B41A;border-color:#F5B41A">Book bord</a>
         </div>
       </div>
@@ -88,8 +88,8 @@
           <div style="font-size:14.5px;font-weight:300;line-height:1.9">Takterrassen<br />Privat lounge<br />Styrerom</div>
         </div>
         <div>
-          <div style="font-family:'Gilroy',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:#6B6257;margin-bottom:12px">Adresse</div>
-          <div style="font-size:14.5px;font-weight:300;line-height:1.9">Construction City<br />Standardveien 1<br />0614 Oslo</div>
+          <div style="font-family:'Gilroy',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:#6B6257;margin-bottom:12px">Åpningstider</div>
+          <div style="font-size:14.5px;font-weight:300;line-height:1.9">Lunsj man–fre 11.00–14.00<br />Selskap og middag etter avtale</div>
         </div>
         <div>
           <div style="font-family:'Gilroy',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:#6B6257;margin-bottom:12px">Booking</div>
@@ -101,20 +101,7 @@
   </section>
 </sc-if>
 
-<sc-if value="{{ visMeny }}" hint-placeholder-val="{{ true }}">
-<div style="background:#F6F0E9">
-  <div style="max-width:1400px;margin:0 auto;padding:14px 32px 6px;display:flex;gap:8px;flex-wrap:wrap">
-    <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="4">
-      <sc-if value="{{ t.active }}" hint-placeholder-val="{{ false }}">
-        <button onClick="{{ t.go }}" style="cursor:pointer;font-family:'Gilroy',sans-serif;background:#121212;border:1px solid #121212;color:#F6F0E9;border-radius:999px;padding:11px 22px;font-size:10px;font-weight:700;letter-spacing:0.09em;text-transform:uppercase">{{ t.label }}</button>
-      </sc-if>
-      <sc-if value="{{ t.idle }}" hint-placeholder-val="{{ true }}">
-        <button onClick="{{ t.go }}" style="cursor:pointer;font-family:'Gilroy',sans-serif;background:transparent;border:1px solid #121212;color:#121212;border-radius:999px;padding:11px 22px;font-size:10px;font-weight:700;letter-spacing:0.09em;text-transform:uppercase" style-hover="background:#F5B41A;border-color:#F5B41A;color:#121212">{{ t.label }}</button>
-      </sc-if>
-    </sc-for>
-  </div>
-</div>
-
+<sc-if value="{{ visMeny }}" hint-placeholder-val="{{ false }}">
 <section style="background:#F6F0E9">
   <div style="max-width:1400px;margin:0 auto;padding:52px 32px 40px;display:flex;gap:56px;flex-wrap:wrap;align-items:flex-start">
     <div style="flex:1 1 380px;min-width:0">
@@ -199,6 +186,7 @@
     <div style="display:flex;flex-direction:column;gap:8px;font-size:13.5px">
       <a href="mailto:hoyden@compass-group.no" style="color:#F6F0E9">hoyden@compass-group.no</a>
       <a href="mailto:booking@constructioncity.no" style="color:#F6F0E9">booking@constructioncity.no</a>
+      <a href="index.html" style="color:#F5B41A;margin-top:6px;font-family:'Gilroy',sans-serif;font-size:10.5px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;text-decoration:none">Construction City Destinasjon ↗</a>
     </div>
   </div>
 </footer>
@@ -209,7 +197,7 @@
 <script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;: {&quot;width&quot;: 1280, &quot;height&quot;: 900}}">
 const MENYER = [
   {
-    id: 'restaurant', label: 'Restaurant', tittel: 'Høstmeny', pris: 960,
+    id: 'restaurant', label: 'Høstmeny', tittel: 'Høstmeny', pris: 960,
     lead: 'Tre retter satt sammen av sesongens råvarer.',
     retter: [
       { kicker: 'Forrett', navn: 'Ørret ceviche', tekst: 'Med søtpotetaioli, vannmelon, mango, vårløk, chili og søtpotetchips.', allergener: 'Allergener: fisk, sulfitt' },
@@ -261,7 +249,12 @@ const MENYER = [
 ];
 
 class Component extends DCLogic {
-  state = { side: 'restaurant', aktiv: 'restaurant', valgt: [], gjester: 20 };
+  state = { side: 'info', aktiv: 'restaurant', valgt: [], gjester: 20 };
+
+  gaTil(side, id) {
+    this.setState(id ? { side: side, aktiv: id } : { side: side });
+    if (typeof window !== 'undefined') window.scrollTo(0, 0);
+  }
 
   renderVals() {
     const kr = (n) => n.toLocaleString('nb-NO') + ',-';
@@ -283,23 +276,14 @@ class Component extends DCLogic {
 
     const side = this.state.side;
     return {
-      sider: [
-        { id: 'restaurant', label: 'Restaurant' },
-        { id: 'meny', label: 'Selskapsmeny' }
-      ].map((s) => ({
-        label: s.label,
-        active: s.id === side,
-        idle: s.id !== side,
-        go: () => { this.setState({ side: s.id }); if (typeof window !== 'undefined') window.scrollTo(0, 0); }
-      })),
-      visRestaurant: side === 'restaurant',
+      visInfo: side === 'info',
       visMeny: side === 'meny',
-      tilMeny: () => { this.setState({ side: 'meny' }); if (typeof window !== 'undefined') window.scrollTo(0, 0); },
-      tabs: MENYER.map((m) => ({
+      tilMeny: () => this.gaTil('meny', MENYER[0].id),
+      tabs: [{ id: 'info', label: 'Restaurant' }].concat(MENYER).map((m) => ({
         label: m.label,
-        active: m.id === this.state.aktiv,
-        idle: m.id !== this.state.aktiv,
-        go: () => this.setState({ aktiv: m.id })
+        active: m.id === 'info' ? side === 'info' : side === 'meny' && m.id === this.state.aktiv,
+        idle: m.id === 'info' ? side !== 'info' : !(side === 'meny' && m.id === this.state.aktiv),
+        go: () => (m.id === 'info' ? this.gaTil('info') : this.gaTil('meny', m.id))
       })),
       menyTittel: cur.tittel,
       menyLead: cur.lead,

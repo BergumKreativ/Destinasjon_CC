@@ -240,49 +240,6 @@
   </sc-if>
 </sc-if>
 
-<sc-if value="{{ isHoyden }}" hint-placeholder-val="{{ false }}">
-  <section data-screen-label="Høyden" style="max-width:1400px;margin:0 auto;padding:56px 32px 0">
-    <div style="font-family:'Gilroy',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;opacity:0.6;margin-bottom:20px">10. etasje · Construction City</div>
-    <h1 style="font-family:'Gloock',serif;font-weight:400;font-size:clamp(40px,5.6vw,78px);line-height:1.02;margin:0 0 22px">Høyden Restaurant</h1>
-    <p style="font-size:20px;max-width:38ch;margin:0 0 30px;line-height:1.45">Et bedre måltid, et møte eller en markering – litt over hverdagen.</p>
-    <div style="display:flex;gap:12px;flex-wrap:wrap">
-      <a href="mailto:hoyden@compass-group.no" style="font-family:'Gilroy',sans-serif;background:#012027;color:#F6F0E9;text-decoration:none;border-radius:999px;padding:16px 28px;font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase" style-hover="background:#F5B41A;color:#121212">Book på e-post →</a>
-      <a href="Hoyden.dc.html" style="font-family:'Gilroy',sans-serif;background:#F5B41A;color:#121212;text-decoration:none;border-radius:999px;padding:16px 28px;font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase" style-hover="background:#121212;color:#F5B41A">Menyer &amp; selskap →</a>
-      <button onClick="{{ goBooking }}" style="cursor:pointer;font-family:'Gilroy',sans-serif;background:#0F2B2E;border:1px solid #0F2B2E;color:#F6F0E9;border-radius:999px;padding:16px 28px;font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase" style-hover="background:#F5B41A;border:1px solid #F5B41A;color:#121212">Book selskap</button>
-    </div>
-  </section>
-
-  <section style="max-width:1400px;margin:0 auto;padding:84px 32px 24px;display:flex;gap:72px;flex-wrap:wrap;align-items:flex-start">
-    <div style="flex:1 1 420px;min-width:0">
-      <h2 style="font-family:'Gloock',serif;font-weight:400;font-size:clamp(30px,3.6vw,48px);line-height:1.12;margin:0 0 26px">Høyt over atriet og pulsen i huset</h2>
-      <p style="margin:0 0 16px;font-size:15px;line-height:1.8">I 10. etasje ligger Høyden Restaurant. Her kan leietakere, gjester og besøkende samles til måltider, møter og markeringer med panoramautsikt over Oslo.</p>
-      <p style="margin:0 0 16px;font-size:15px;line-height:1.8">Høyden passer for middager, kundearrangementer, selskaper og anledninger som fortjener litt ekstra. Opplevelsen kan også kombineres med privat lounge, styrerom eller takterrasse etter behov.</p>
-      <p style="margin:0;font-size:15px;line-height:1.8">Med direkte tilgang til takterrassen kan arrangementet fortsette ute når været tillater det – med byen som bakteppe.</p>
-    </div>
-    <div style="flex:1 1 380px;min-width:0;position:relative">
-      <div style="position:relative;width:100%;aspect-ratio:4/3;overflow:hidden">
-        <image-slot id="hoyden-sal" src="assets/cc/hoyden-glass.jpg" shape="rect" placeholder="Høyden – restaurantsalen"></image-slot>
-      </div>
-      <button onClick="{{ goBooking }}" style="cursor:pointer;position:absolute;right:-16px;top:-36px;width:154px;height:154px;border-radius:50%;background:#012027;border:none;color:#F6F0E9;display:flex;align-items:center;justify-content:center;text-align:center;padding:22px;font-family:'Gilroy',sans-serif;font-size:10px;font-weight:400;letter-spacing:0.11em;text-transform:uppercase;line-height:1.7;transform:rotate(-8deg)" style-hover="background:#0F2B2E">Ta kontakt for sesongens meny</button>
-    </div>
-  </section>
-
-  <section style="max-width:1400px;margin:0 auto;padding:56px 32px 100px">
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:40px">
-      <sc-for list="{{ hoydenCards }}" as="c" hint-placeholder-count="3">
-        <div style="border-top:1px solid rgba(15,43,46,0.25);padding-top:26px;display:flex;flex-direction:column;gap:16px">
-          <div style="position:relative;width:100%;aspect-ratio:4/3;overflow:hidden">
-            <image-slot id="{{ c.slot }}" src="{{ c.src }}" shape="rect" placeholder="Bilde"></image-slot>
-          </div>
-          <div style="font-family:'Gloock',serif;font-size:24px">{{ c.title }}</div>
-          <div style="font-size:14px;line-height:1.7;opacity:0.8">{{ c.text }}</div>
-          <button onClick="{{ c.go }}" style="cursor:pointer;margin-top:auto;align-self:flex-start;font-family:'Gilroy',sans-serif;background:transparent;border:1px solid #0F2B2E;color:#0F2B2E;border-radius:999px;padding:12px 20px;font-size:9.5px;font-weight:400;letter-spacing:0.12em;text-transform:uppercase" style-hover="background:#0F2B2E;color:#F6F0E9">{{ c.cta }}</button>
-        </div>
-      </sc-for>
-    </div>
-  </section>
-</sc-if>
-
 <sc-if value="{{ isFoodcourt }}" hint-placeholder-val="{{ false }}">
   <section data-screen-label="Foodcourt" style="max-width:1400px;margin:0 auto;padding:56px 32px 0;display:flex;gap:48px;flex-wrap:wrap;align-items:flex-end">
     <div style="flex:1 1 420px;min-width:0">
@@ -655,7 +612,6 @@ class Component extends DCLogic {
       notMotemat: route !== 'motemat',
       showSpacer: route !== 'hjem' && route !== 'motemat',
       isSection: !!sec,
-      isHoyden: route === 'hoyden',
       isFoodcourt: route === 'foodcourt',
       isMotemat: route === 'motemat',
       isBooking: route === 'booking',
@@ -675,7 +631,7 @@ class Component extends DCLogic {
         title: t.title,
         lead: t.lead,
         tags: wrap(t.tags),
-        go: () => this.go(t.route)
+        go: () => { if (t.href) { window.open(t.href, '_blank', 'noopener'); } else { this.go(t.route, t.tab); } }
       })),
 
       hours: D ? D.HOURS : [],
@@ -715,20 +671,6 @@ class Component extends DCLogic {
       heroSrc: hero,
       heroSlot: 'hero-' + (D && D.HERO_TAB && D.HERO_TAB[heroKey] ? heroKey : route),
 
-      hoydenSal: (function () {
-        if (!D) return '';
-        const brukt = [D.HERO.hoyden].concat(D.HOYDEN_CARDS.map((x) => x.src));
-        const kand = ['assets/foto/eik-2.jpg', 'assets/foto/glasshallen.jpg', 'assets/foto/dsc03685.png', 'assets/foto/pic-3.jpg'];
-        return kand.find((p) => brukt.indexOf(p) === -1) || '';
-      })(),
-      hoydenCards: (D ? D.HOYDEN_CARDS : []).map((x) => ({
-        slot: x.slot,
-        src: x.src || '',
-        title: x.title,
-        text: x.text,
-        cta: x.cta,
-        go: () => this.go(x.route, x.tab)
-      })),
       concepts: D ? D.CONCEPTS : [],
       cafes: D ? D.CAFES : [],
 
@@ -739,7 +681,6 @@ class Component extends DCLogic {
         go: () => this.setState({ menuTab: t.id })
       })),
       showVicinoLogo: route === 'servering' && tabId === 'vicino',
-      ...this.hoydenMeny(),
       menuTitle: mt ? mt.title : '',
       showPackages: menuTab === 'pakker',
       showItems: menuTab !== 'pakker',
@@ -803,31 +744,6 @@ class Component extends DCLogic {
           encodeURIComponent('Forespørsel – ' + f.type) + '&body=' + encodeURIComponent(body);
         this.setState({ sent: true });
       }
-    };
-  }
-
-  hoydenMeny() {
-    const D = window.DCDATA;
-    const list = (D && D.HOYDEN_MENYER) || [];
-    const active = this.state.menyId || (list[0] && list[0].id);
-    const cur = list.find((m) => m.id === active) || list[0] || {};
-    const lenke = (D && D.HOYDEN_MENY_LENKE) || '';
-    return {
-      menyTabs: list.map((m) => ({
-        label: m.label,
-        active: m.id === active,
-        idle: m.id !== active,
-        go: () => this.setState({ menyId: m.id })
-      })),
-      menySrc: cur.src || '',
-      menyTittel: cur.title || '',
-      menyNote: cur.note || '',
-      menyHarLenke: !!lenke,
-      menyLenke: lenke,
-      menyZoomPa: () => this.setState({ menyZoom: true }),
-      menyZoomAv: () => this.setState({ menyZoom: false }),
-      menyZoomer: !!this.state.menyZoom,
-      stopp: (e) => { if (e && e.stopPropagation) e.stopPropagation(); }
     };
   }
 
