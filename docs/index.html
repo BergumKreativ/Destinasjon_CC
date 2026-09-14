@@ -570,6 +570,7 @@ class Component extends DCLogic {
   componentWillUnmount() { if (this._t) clearInterval(this._t); }
 
   go = (route, tab) => {
+    if (route === 'hoyden') { route = 'servering'; tab = tab || 'hoyden'; }
     this.setState((s) => ({
       route,
       tabs: tab ? Object.assign({}, s.tabs, { [route]: tab }) : s.tabs,
@@ -580,9 +581,9 @@ class Component extends DCLogic {
 
   renderVals() {
     const D = (typeof window !== 'undefined' && window.DCDATA) || null;
-    const route = this.state.route;
+    const route = this.state.route === 'hoyden' ? 'servering' : this.state.route;
     const sec = D && D.SECTIONS[route];
-    const tabId = sec ? (this.state.tabs[route] || sec.tabs[0].id) : null;
+    const tabId = sec ? (this.state.tabs[route] || (this.state.route === 'hoyden' ? 'hoyden' : sec.tabs[0].id)) : null;
     const c = sec ? sec.content[tabId] : null;
     const menuTab = this.state.menuTab;
 
